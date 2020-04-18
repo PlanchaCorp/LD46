@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Recycler : MachineAbstract
 {
-    public const float MAX_DODOMASS_STORAGE = 80;
+    public const float MAX_DODONIUM_STORAGE = 80;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 4;
     
     protected override void Start()
     {
         base.Start();
-        maxDodomassStorage = MAX_DODOMASS_STORAGE;
+        maxDodoniumStorage = MAX_DODONIUM_STORAGE;
         resourceProductionFrequency = RESOURCE_PRODUCTION_FREQUENCY;
-        dodomassAccumulated = 0;
+        dodoniumAccumulated = 0;
     }
 
-    public float SendToRecycler(float dodomass)
+    public float SendToRecycler(float dodonium)
     {
-        dodomassAccumulated += dodomass;
-        if (dodomassAccumulated > maxDodomassStorage)
+        dodoniumAccumulated += dodonium;
+        if (dodoniumAccumulated > maxDodoniumStorage)
         {
-            float dodomassSurplus = dodomassAccumulated - maxDodomassStorage;
-            dodomassAccumulated = maxDodomassStorage;
-            return dodomassSurplus;
+            float dodoniumSurplus = dodoniumAccumulated - maxDodoniumStorage;
+            dodoniumAccumulated = maxDodoniumStorage;
+            return dodoniumSurplus;
         }
         return 0;
     }

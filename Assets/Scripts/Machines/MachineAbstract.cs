@@ -5,20 +5,24 @@ using UnityEngine;
 public abstract class MachineAbstract : MonoBehaviour
 {
     protected float resourceProductionFrequency = 0.5f;
+    protected float resourceReceiveFrequency = 0.5f;
 
     private SpaceStationManager spaceStationManager;
 
     protected float oxygenPerMinuteGenerating = 0;
-    protected float dodomassPerMinuteGenerating = 0;
+    protected float dodoniumPerMinuteGenerating = 0;
     protected float oxygenAccumulated = 0;
-    protected float dodomassAccumulated = 0;
+    protected float dodoniumAccumulated = 0;
     protected float maxOxygenStorage = 0;
-    protected float maxDodomassStorage = 0;
-    protected float accumulatedTime = 0;
+    protected float maxDodoniumStorage = 0;
+    protected float receiveAccumulatedTime = 0;
+    protected float productionAccumulatedTime = 0;
+    protected bool isReceivingOxygen = false;
+    protected bool isReceivingDodonium = false;
 
     protected virtual void Start()
     {
-        accumulatedTime = 0;
+        productionAccumulatedTime = 0;
         GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
         if (spaceStation == null)
         {
@@ -37,7 +41,8 @@ public abstract class MachineAbstract : MonoBehaviour
 
     protected virtual void Update()
     {
-        accumulatedTime += Time.deltaTime;
+        productionAccumulatedTime += Time.deltaTime;
+        receiveAccumulatedTime += Time.deltaTime;
     }
 
     /// Mouse interaction to override
@@ -49,17 +54,47 @@ public abstract class MachineAbstract : MonoBehaviour
     /// Generating resources
     public virtual void Produce()
     {
-        if (accumulatedTime >= resourceProductionFrequency && (oxygenPerMinuteGenerating > 0 || dodomassPerMinuteGenerating > 0 || oxygenAccumulated > 0 || dodomassAccumulated > 0))
+        if (productionAccumulatedTime >= resourceProductionFrequency && 
+                (!isReceivingOxygen || !isReceivingDodonium) &&
+                (oxygenPerMinuteGenerating > 0 || dodoniumPerMinuteGenerating > 0 || oxygenAccumulated > 0 || dodoniumAccumulated > 0))
         {
-            float unconsumedTime = accumulatedTime % resourceProductionFrequency;
+            float unconsumedTime = productionAccumulatedTime % resourceProductionFrequency;
             if (spaceStationManager != null) 
             {
-                spaceStationManager.BufferResources(oxygenPerMinuteGenerating * (accumulatedTime / 60) + oxygenAccumulated, 
-                        dodomassPerMinuteGenerating * (accumulatedTime / 60) + dodomassAccumulated);
+                if (!isReceivingOxygen)
+                {
+                    oxygenAccumulated = 0;
+                    spaceStationManager.BufferOxygen(oxygenPerMinuteGenerating * (productionAccumulatedTime / 60) + oxygenAccumulated);
+                }
+                if (!isReceivingDodonium)
+                {
+                    dodoniumAccumulated = 0;
+                    spaceStationManager.BufferDodonium(dodoniumPerMinuteGenerating * (productionAccumulatedTime / 60) + dodoniumAccumulated);
+                }
             }
-            accumulatedTime = unconsumedTime;
-            oxygenAccumulated = 0;
-            dodomassAccumulated = 0;
+            productionAccumulatedTime = unconsumedTime;
+        }
+    }
+    /// Requesting resources
+    public virtual void Receive()
+    {
+        if (receiveAccumulatedTime >= resourceReceiveFrequency && 
+                (isReceivingOxygen || isReceivingDodonium) &&
+                (oxygenAccumulated < maxOxygenStorage || dodoniumAccumulated < maxDodoniumStorage))
+        {
+            float unconsumedTime = receiveAccumulatedTime % resourceReceiveFrequency;
+            if (spaceStationManager != null) 
+            {
+                if (isReceivingOxygen)
+                {
+                    oxygenAccumulated += spaceStationManager.GiveOxygen(oxygenPerMinuteGenerating * (productionAccumulatedTime / 60) + oxygenAccumulated);
+                }
+                if (isReceivingOxygen)
+                {
+                    dodoniumAccumulated += spaceStationManager.GiveDodonium(dodoniumPerMinuteGenerating * (productionAccumulatedTime / 60) + dodoniumAccumulated);
+                }
+            }
+            receiveAccumulatedTime = unconsumedTime;
         }
     }
 }

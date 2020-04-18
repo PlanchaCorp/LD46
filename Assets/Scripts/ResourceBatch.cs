@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ResourceBatch
 {
-    public ResourceBatch(float oxygen, float dodomass)
+    public ResourceBatch(float oxygen, float dodonium)
     {
         this.oxygen = oxygen;
-        this.dodomass = dodomass;
+        this.dodonium = dodonium;
     }
 
     public float oxygen { get; set; }
-    public float dodomass { get; set; }
+    public float dodonium { get; set; }
 }

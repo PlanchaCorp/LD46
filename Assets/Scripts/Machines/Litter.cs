@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Litter : MachineAbstract
 {
-    public const float MAX_DODOMASS_STORAGE = 20;
+    public const float MAX_DODONIUM_STORAGE = 20;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 1;
 
     [SerializeField]
@@ -15,10 +15,10 @@ public class Litter : MachineAbstract
     protected override void Start()
     {
         base.Start();
-        maxDodomassStorage = MAX_DODOMASS_STORAGE;
+        maxDodoniumStorage = MAX_DODONIUM_STORAGE;
         resourceProductionFrequency = RESOURCE_PRODUCTION_FREQUENCY;
         dodosPresent = new List<int>();
-        dodomassAccumulated = 0;
+        dodoniumAccumulated = 0;
     }
 
     /// Counting all the dodos coming in and out
@@ -40,12 +40,12 @@ public class Litter : MachineAbstract
     /// Dodo sending its gift to the litter. Returns the amount of gift that could not be stored
     public float FillLitter(float weight)
     {
-        dodomassAccumulated += weight;
-        if (dodomassAccumulated > maxDodomassStorage)
+        dodoniumAccumulated += weight;
+        if (dodoniumAccumulated > maxDodoniumStorage)
         {
-            float dodomassSurplus = dodomassAccumulated - maxDodomassStorage;
-            dodomassAccumulated = maxDodomassStorage;
-            return dodomassSurplus;
+            float dodoniumSurplus = dodoniumAccumulated - maxDodoniumStorage;
+            dodoniumAccumulated = maxDodoniumStorage;
+            return dodoniumSurplus;
         }
         return 0;
     }
@@ -55,12 +55,12 @@ public class Litter : MachineAbstract
     {
         if (recycler != null)
         {
-            if (accumulatedTime >= resourceProductionFrequency && dodomassAccumulated > 0)
+            if (productionAccumulatedTime >= resourceProductionFrequency && dodoniumAccumulated > 0)
             {
-                float unconsumedTime = accumulatedTime % resourceProductionFrequency;
-                float remainingDodomass = recycler.SendToRecycler(dodomassAccumulated);
-                accumulatedTime = unconsumedTime;
-                dodomassAccumulated = remainingDodomass;
+                float unconsumedTime = productionAccumulatedTime % resourceProductionFrequency;
+                float remainingDodonium = recycler.SendToRecycler(dodoniumAccumulated);
+                productionAccumulatedTime = unconsumedTime;
+                dodoniumAccumulated = remainingDodonium;
             }
         }
         // TODO: If no recycler attached, produce a nice animation

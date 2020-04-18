@@ -11,49 +11,76 @@ public class SpaceStationManager : MonoBehaviour
     [SerializeField]
     public const float OXYGEN_INITIAL_AMOUNT = 100;
     [SerializeField]
-    public const float DODOMASS_INITIAL_AMOUNT = 15;
+    public const float dodonium_INITIAL_AMOUNT = 15;
 
     private List<MachineAbstract> machines;
 
-    private float accumulatedTime;
+    private float productionAccumulatedTime;
 
 
     private float oxygenAmount; // in L
-    private float dodomassAmount; // in kg
+    private float dodoniumAmount; // in kg
     private float bufferedOxygen;
-    private float bufferedDodomass;
+    private float bufferedDodonium;
 
     // Start is called before the first frame update
     void Start()
     {
         oxygenAmount = OXYGEN_INITIAL_AMOUNT;
-        dodomassAmount = DODOMASS_INITIAL_AMOUNT;
+        dodoniumAmount = dodonium_INITIAL_AMOUNT;
         machines = new List<MachineAbstract>();
         InvokeRepeating("Generate", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
     }
 
     void Update()
     {
-        accumulatedTime += Time.deltaTime;
+        productionAccumulatedTime += Time.deltaTime;
     }
 
-    public void BufferResources(float oxygen, float dodomass)
+    /// The station is receiving resources which will be waiting to be inserted into the station systems
+    public void BufferOxygen(float oxygen)
     {
         bufferedOxygen += oxygen;
-        bufferedDodomass += dodomass;
+    }
+    public void BufferDodonium(float dodonium)
+    {
+        bufferedDodonium += dodonium;
+    }
+    /// A machine is requesting resources
+    public float GiveOxygen(float oxygenRequested)
+    {
+        if (oxygenAmount > oxygenRequested)
+        {
+            oxygenAmount -= oxygenRequested;
+            return oxygenRequested;
+        } else {
+            oxygenAmount = 0;
+            return oxygenAmount;
+        }
+    }
+    public float GiveDodonium(float dodoniumRequested)
+    {
+        if (dodoniumAmount > dodoniumRequested)
+        {
+            dodoniumAmount -= dodoniumRequested;
+            return dodoniumRequested;
+        } else {
+            dodoniumAmount = 0;
+            return dodoniumAmount;
+        }
     }
     
     /// Generating resources
     private void Generate()
     {
-        if (accumulatedTime >= RESOURCE_GENERATION_FREQUENCY && (bufferedOxygen > 0 || bufferedDodomass > 0))
+        if (productionAccumulatedTime >= RESOURCE_GENERATION_FREQUENCY && (bufferedOxygen > 0 || bufferedDodonium > 0))
         {
-            accumulatedTime = accumulatedTime % RESOURCE_GENERATION_FREQUENCY;
+            productionAccumulatedTime = productionAccumulatedTime % RESOURCE_GENERATION_FREQUENCY;
             oxygenAmount += bufferedOxygen;
-            dodomassAmount += bufferedDodomass;
+            dodoniumAmount += bufferedDodonium;
             bufferedOxygen = 0;
-            bufferedDodomass = 0;
-            Debug.Log("Your station now has " + oxygenAmount + "L of oxygen and " + dodomassAmount + "kg of dodomass.");
+            bufferedDodonium = 0;
+            Debug.Log("Your station now has " + oxygenAmount + "L of oxygen and " + dodoniumAmount + "kg of dodonium.");
         }
     }
 
