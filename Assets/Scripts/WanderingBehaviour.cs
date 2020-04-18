@@ -46,13 +46,14 @@ public class WanderingBehaviour : StateMachineBehaviour
         public void Wander(){
         if(Time.time > nextMoveTime){
             nextMoveTime+= Random.Range(minWatingTime,maxWatingTime);
-         movement.goal = GetNewGoal();  
+         movement.setObjective(GetNewGoal());  
         }   
     }
     private Vector2 GetNewGoal(){
-        var angle = Random.value;
+        Vector2 pos = movement.GetComponent<Transform>().position;
+        float angle = Random.Range(0,360);
         float x  = Mathf.Cos(angle) * wanderingRadius;
         float y = Mathf.Sin(angle) * wanderingRadius;
-        return new Vector2(x,y);
+        return new Vector2(x,y)+pos;
     }
 }
