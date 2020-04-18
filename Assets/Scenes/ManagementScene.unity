@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5acf13e9f84487b97469c40442efd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RESOURCE_GENERATION_FREQUENCY: 0.5
 --- !u!1 &1530465682
 GameObject:
   m_ObjectHideFlags: 3
