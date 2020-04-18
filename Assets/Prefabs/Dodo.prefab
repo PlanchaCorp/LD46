@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7622214043281288527}
   - component: {fileID: 2756484819460862156}
   - component: {fileID: 2239373588977310333}
+  - component: {fileID: 6569800301310213629}
   m_Layer: 0
   m_Name: Dodo
   m_TagString: Untagged
@@ -90,6 +91,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &6569800301310213629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687221751350039216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7748bb9a849a04589473fcce49fa0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12.1
+  minWatingTime: 4.71
+  maxWatingTime: 9.8
 --- !u!1 &2687221752505419651
 GameObject:
   m_ObjectHideFlags: 0
