@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 3407278116724314865, guid: c2ba0e6ab6b6e5548b01de6f3eb7243b, type: 3}
   cannon: {fileID: 9148276587976937662}
+  rail: {fileID: 0}
+  nextPoint: 0
+  previousPoint: 0
 --- !u!50 &146732461
 Rigidbody2D:
   serializedVersion: 4
@@ -85,7 +88,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.11
 --- !u!1 &2598411751522800180
 GameObject:
   m_ObjectHideFlags: 0
