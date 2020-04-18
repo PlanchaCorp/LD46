@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 722203781731773398}
+  - component: {fileID: 1725945472}
   m_Layer: 0
-  m_Name: wayPoint4 (1)
+  m_Name: wayPoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,6 +31,22 @@ Transform:
   m_Father: {fileID: 5373654247777509913}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1725945472
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897333919959189130}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5373654246920288610
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5373654246920288609}
+  - component: {fileID: 1576323731}
   m_Layer: 0
   m_Name: wayPoint1
   m_TagString: Untagged
@@ -60,6 +78,22 @@ Transform:
   m_Father: {fileID: 5373654247777509913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1576323731
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373654246920288610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5373654247777509914
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +148,9 @@ MonoBehaviour:
   - {fileID: 5373654248374425295}
   - {fileID: 5373654248692568071}
   - {fileID: 722203781731773398}
+  centry: {fileID: 0}
+  nextPoint: 0
+  previousPoint: 0
 --- !u!1 &5373654248247904592
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5373654248247904599}
+  - component: {fileID: 739441317}
   m_Layer: 0
   m_Name: wayPoint2
   m_TagString: Untagged
@@ -144,6 +182,22 @@ Transform:
   m_Father: {fileID: 5373654247777509913}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &739441317
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373654248247904592}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5373654248374425288
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5373654248374425295}
+  - component: {fileID: 614950205}
   m_Layer: 0
   m_Name: wayPoint3
   m_TagString: Untagged
@@ -174,6 +229,22 @@ Transform:
   m_Father: {fileID: 5373654247777509913}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &614950205
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373654248374425288}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &5373654248692568064
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5373654248692568071}
+  - component: {fileID: 932307957}
   m_Layer: 0
   m_Name: wayPoint4
   m_TagString: Untagged
@@ -204,3 +276,19 @@ Transform:
   m_Father: {fileID: 5373654247777509913}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &932307957
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373654248692568064}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
