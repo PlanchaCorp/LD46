@@ -9,6 +9,7 @@ public class Recycler : MachineAbstract
     
     protected override void Start()
     {
+        base.Start();
         maxDodomassStorage = MAX_DODOMASS_STORAGE;
         resourceProductionFrequency = RESOURCE_PRODUCTION_FREQUENCY;
         dodomassAccumulated = 0;

@@ -8,13 +8,13 @@ public abstract class MachineAbstract : MonoBehaviour
 
     private SpaceStationManager spaceStationManager;
 
-    protected float oxygenPerMinuteGenerating;
-    protected float dodomassPerMinuteGenerating;
-    protected float oxygenAccumulated;
-    protected float dodomassAccumulated;
-    protected float maxOxygenStorage;
-    protected float maxDodomassStorage;
-    protected float accumulatedTime;
+    protected float oxygenPerMinuteGenerating = 0;
+    protected float dodomassPerMinuteGenerating = 0;
+    protected float oxygenAccumulated = 0;
+    protected float dodomassAccumulated = 0;
+    protected float maxOxygenStorage = 0;
+    protected float maxDodomassStorage = 0;
+    protected float accumulatedTime = 0;
 
     protected virtual void Start()
     {
@@ -47,9 +47,9 @@ public abstract class MachineAbstract : MonoBehaviour
     }
 
     /// Generating resources
-    protected virtual void Produce()
+    public virtual void Produce()
     {
-        if (accumulatedTime >= resourceProductionFrequency && oxygenPerMinuteGenerating > 0 && dodomassPerMinuteGenerating > 0)
+        if (accumulatedTime >= resourceProductionFrequency && (oxygenPerMinuteGenerating > 0 || dodomassPerMinuteGenerating > 0 || oxygenAccumulated > 0 || dodomassAccumulated > 0))
         {
             float unconsumedTime = accumulatedTime % resourceProductionFrequency;
             if (spaceStationManager != null) 

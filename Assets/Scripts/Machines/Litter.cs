@@ -7,12 +7,14 @@ public class Litter : MachineAbstract
     public const float MAX_DODOMASS_STORAGE = 20;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 1;
 
+    [SerializeField]
     private Recycler recycler;
 
     private List<int> dodosPresent;
 
     protected override void Start()
     {
+        base.Start();
         maxDodomassStorage = MAX_DODOMASS_STORAGE;
         resourceProductionFrequency = RESOURCE_PRODUCTION_FREQUENCY;
         dodosPresent = new List<int>();
@@ -49,7 +51,7 @@ public class Litter : MachineAbstract
     }
 
     /// Preventing default production behaviour to send to the litter instead
-    protected override void Produce() 
+    public override void Produce() 
     {
         if (recycler != null)
         {
@@ -67,5 +69,6 @@ public class Litter : MachineAbstract
     protected override void OnMouseDown()
     {
         Debug.Log("You dodoed in the wrong neighborhood");
+        FillLitter(1.8f);
     }
 }

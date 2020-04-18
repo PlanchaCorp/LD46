@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpaceStationManager : MonoBehaviour
 {
     [SerializeField]
-    protected float RESOURCE_GENERATION_FREQUENCY = 0.5f;
+    protected float RESOURCE_GENERATION_FREQUENCY = 1f;
 
     [SerializeField]
     public const float OXYGEN_INITIAL_AMOUNT = 100;
@@ -46,13 +46,14 @@ public class SpaceStationManager : MonoBehaviour
     /// Generating resources
     private void Generate()
     {
-        if (accumulatedTime >= RESOURCE_GENERATION_FREQUENCY)
+        if (accumulatedTime >= RESOURCE_GENERATION_FREQUENCY && (bufferedOxygen > 0 || bufferedDodomass > 0))
         {
             accumulatedTime = accumulatedTime % RESOURCE_GENERATION_FREQUENCY;
             oxygenAmount += bufferedOxygen;
             dodomassAmount += bufferedDodomass;
             bufferedOxygen = 0;
             bufferedDodomass = 0;
+            Debug.Log("Your station now has " + oxygenAmount + "L of oxygen and " + dodomassAmount + "kg of dodomass.");
         }
     }
 
