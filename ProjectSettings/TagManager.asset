@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SpaceStation
   - Dodo
+  - Wall
   layers:
   - Default
   - TransparentFX
