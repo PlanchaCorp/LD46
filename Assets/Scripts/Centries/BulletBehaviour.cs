@@ -22,8 +22,8 @@ public class BulletBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.tag.Equals("Dodo")){
-            DodoMovement movement = collider.GetComponent<DodoMovement>();
-             movement.PushInDirection(targetPoint.position);
+            DodoManager dodoManager = collider.GetComponent<DodoManager>();
+            dodoManager.PushInDirection(targetPoint.position);
         }
         Destroy(gameObject);
     }
