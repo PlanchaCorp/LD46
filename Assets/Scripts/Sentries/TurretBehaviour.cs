@@ -11,7 +11,6 @@ public class TurretBehaviour : MonoBehaviour
     private Transform cannon;
     private Camera mainCamera;
 
-    [SerializeField]
     private Rail rail;
     private Vector3 mousePos;
     // Start is called before the first frame update
@@ -24,6 +23,7 @@ public class TurretBehaviour : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rail = GetComponentInParent<Rail>();
         mainCamera = Camera.main;
         previousPoint = 0;
         canFire = true;
