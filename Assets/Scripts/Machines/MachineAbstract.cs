@@ -20,6 +20,7 @@ public abstract class MachineAbstract : MonoBehaviour
     protected bool isReceivingOxygen = false;
     protected bool isReceivingDodonium = false;
 
+
     protected virtual void Start()
     {
         productionAccumulatedTime = 0;

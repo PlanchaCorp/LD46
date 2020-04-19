@@ -2,49 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dispenser : MachineAbstract
+public class Dispenser : LuringMachineAbstract
 {
+    public const float EAT_TIME = 8.0f;
+    public const float DODO_HUNGER = 0.60f;
     public const float MAX_DODONIUM_STORAGE = 5;
+    public const int FOOD_STORAGE = 3;
     public const float RESOURCE_RECEIVE_FREQUENCY = 2;
 
-    private bool foodIsServed;
-    private bool dodoEating;
+    private int foodServed;
 
     override protected void Start()
     {
         base.Start();
-        foodIsServed = false;
-        dodoEating = false;
+        occupationTime = EAT_TIME;
+        foodServed = 0;
         isReceivingDodonium = true;
         resourceReceiveFrequency = RESOURCE_RECEIVE_FREQUENCY;
         maxDodoniumStorage = MAX_DODONIUM_STORAGE;
     }
 
-    override protected void OnMouseDown()
+    public override bool IsDodoLured(DodoManager dodo)
     {
-        foodIsServed = true;
+        return dodo.hunger > DODO_HUNGER;
+    }
+
+    protected override void OnMouseDown()
+    {
+        if (foodServed < FOOD_STORAGE && dodoniumAccumulated > 0)
+        {
+            int fillingDodonium = (int) Mathf.Min(Mathf.Floor(dodoniumAccumulated), FOOD_STORAGE - foodServed);
+            dodoniumAccumulated -= fillingDodonium;
+            foodServed += fillingDodonium;
+            // TODO: User feedback for serving food
+        }
         Debug.Log("Need a dispenser here!");
     }
 
     /// Host a dodo that came eat for the given amount of time
-    public void HostEating(float dodoEatTime)
+    public override void StartInteraction(DodoManager dodo)
     {
-        if (foodIsServed)
-        {
-            dodoEating = true;
-            Invoke("BidFarewellToDodo", dodoEatTime);
-        }
+        if (foodServed > dodosPresent.Count)
+            base.StartInteraction(dodo);
     }
     /// Bid farewell to a dodo that finished eating
-    private void FinishEating() 
+    public override void FinishInteraction(DodoManager dodo) 
     {
-        dodoEating = false;
-        // TODO: Send fullness info to dodo
-        foodIsServed = false;
-    }
-    /// The dodo left without finishing his plate!
-    public void CancelEating()
-    {
-        dodoEating = false;
+        dodo.hunger = 0;
+        dodo.mealTimeAgo += 0.01f;
+        foodServed--;
+        base.FinishInteraction(dodo);
     }
 }
