@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fa7fc7749f1e84592b5b426c6f4685, type: 3}
   m_Name: Litter
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  size: 0
-  element: {fileID: 0}
+  icon: {fileID: 21300000, guid: 90dc9266d157c08afa98c5383170105f, type: 3}
+  size: 2
+  element: {fileID: 1681245405337361013, guid: e2b8a6c757420d74790edee762de1f84, type: 3}
