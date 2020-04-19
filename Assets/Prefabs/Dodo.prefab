@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5263665123131762110}
   m_Layer: 0
   m_Name: Dodo
-  m_TagString: Untagged
+  m_TagString: Dodo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,8 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7748bb9a849a04589473fcce49fa0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12.1
-  goal: {x: 0, y: 0}
+  speed: 4.23
+  stateMachine: {fileID: 7622214043281288527}
+  canMove: 1
 --- !u!212 &5263665123131762110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -143,8 +144,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 4805860825968847213, guid: 7c2922251d13919418f51b829f197267,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,6 +154,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
