@@ -69,9 +69,8 @@ public class DodoManager : MonoBehaviour
 
     public void PushInDirection(Vector2 pushVector){
         this.pushVector = pushVector;
-        canMove = false;
         stateMachine.SetTrigger("stun");
-        rb.AddForce(pushVector * 2, ForceMode2D.Impulse);
+        goal = pushVector;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
