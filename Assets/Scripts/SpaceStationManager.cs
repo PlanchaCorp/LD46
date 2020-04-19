@@ -18,6 +18,7 @@ public class SpaceStationManager : MonoBehaviour
     private float productionAccumulatedTime;
 
 
+    public int dodoAmount { get; set; }
     private float oxygenAmount; // in L
     private float dodoniumAmount; // in kg
     private float bufferedOxygen;
@@ -26,6 +27,7 @@ public class SpaceStationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dodoAmount = 1;
         oxygenAmount = OXYGEN_INITIAL_AMOUNT;
         dodoniumAmount = dodonium_INITIAL_AMOUNT;
         machines = new List<MachineAbstract>();
