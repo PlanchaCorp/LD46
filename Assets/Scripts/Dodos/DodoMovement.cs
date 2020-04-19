@@ -27,7 +27,7 @@ public class DodoMovement : MonoBehaviour
         if(canMove){
         Vector2 newPos = Vector2.MoveTowards(transform.position,goal, speed * Time.deltaTime);
         rb.MovePosition(newPos);
-        } 
+        }
     }
 
     public void setObjective(Vector2 newObjective){
@@ -42,9 +42,8 @@ public class DodoMovement : MonoBehaviour
 
     public void PushInDirection(Vector2 pushVector){
         this.pushVector = pushVector;
-        canMove = false;
         stateMachine.SetTrigger("stun");
-         rb.AddForce(pushVector *2,ForceMode2D.Impulse);
+        goal = pushVector;
     }
     
 }

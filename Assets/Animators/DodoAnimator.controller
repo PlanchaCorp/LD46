@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stun
-  m_Speed: 1
+  m_Speed: 0.92
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8891160988761699387}
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: d9c58d3685e2c944da3f8bfb1e5ae691, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -121,7 +121,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -146,10 +146,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -4023226898943036781}
-    m_Position: {x: 320, y: 180, z: 0}
+    m_Position: {x: 430, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9087954320845491264}
-    m_Position: {x: 50, y: 180, z: 0}
+    m_Position: {x: 130, y: 180, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -174,9 +174,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 2
+  m_ExitTime: 5.55
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
