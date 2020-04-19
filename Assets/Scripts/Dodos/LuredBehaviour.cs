@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class LuredBehaviour : StateMachineBehaviour
 {
+    public const float LURE_TIMEOUT = 6;
     private DodoManager dodoManager;
     private LuringMachineAbstract luringMachine;
     private Transform occupation;
     private bool isRigid;
     private float occupationFinishTime = 0;
     private float occupationTime;
+    private float lureTimeout;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        lureTimeout = Time.time + LURE_TIMEOUT;
         occupationFinishTime = 0;
         dodoManager = animator.GetComponent<DodoManager>();
         luringMachine = dodoManager.luringMachine;
@@ -25,7 +28,6 @@ public class LuredBehaviour : StateMachineBehaviour
             {
                 int occupationNumber = Random.Range(0, occupationCount);
                 occupation = machineChild.GetChild(occupationNumber);
-                dodoManager.setObjective(occupation.position);
             }
 
         }
@@ -34,7 +36,8 @@ public class LuredBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if ((occupation.position - dodoManager.transform.position).magnitude < 0.05f)
+        Vector2 dodoToMachine = occupation.position - dodoManager.transform.position;
+        if (dodoToMachine.magnitude < 0.05f)
         {
             if (occupationFinishTime == 0)
             {
@@ -49,6 +52,12 @@ public class LuredBehaviour : StateMachineBehaviour
                 }
                 dodoManager.stateMachine.SetTrigger("delure");
             }
+        } else if (Time.time > lureTimeout) {
+            dodoManager.stateMachine.SetTrigger("delure");
+        } else {
+            dodoManager.transform.Translate(dodoToMachine * Time.deltaTime * dodoManager.speed, Space.World);
+            float angle = Mathf.Atan2(-dodoToMachine.y, -dodoToMachine.x) * Mathf.Rad2Deg;
+            dodoManager.transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
         }
     }
 

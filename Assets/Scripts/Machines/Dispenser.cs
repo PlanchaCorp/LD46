@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dispenser : LuringMachineAbstract
 {
     public const float EAT_TIME = 5.0f;
-    public const float DODO_HUNGER = 0.60f;
+    public const float DODO_HUNGER = 60f;
     public const float MAX_DODONIUM_STORAGE = 5;
     public const int FOOD_STORAGE = 3;
     public const float RESOURCE_RECEIVE_FREQUENCY = 2;

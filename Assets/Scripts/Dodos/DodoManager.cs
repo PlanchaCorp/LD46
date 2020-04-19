@@ -23,8 +23,6 @@ public class DodoManager : MonoBehaviour
     public Animator stateMachine { get; set; }
     private Rigidbody2D rb;
 
-    private Vector2 goal;
-
     public bool canMove = true;
 
     void Start()
@@ -50,15 +48,15 @@ public class DodoManager : MonoBehaviour
             {
                 mealTimeAgo = 0;
                 Debug.Log("Oh no! The dodo could not take it anymore!");
-                // TODO: Implement dodo relaxing animation
+                GameObject animation = Instantiate(Resources.Load<GameObject>("DisgraceAnimation"));
+                if (animation == null) {
+                    Debug.LogError("Could not find DisgraceAnimation prefab in Resources folder!");
+                } else {
+                    animation.transform.parent = transform;
+                    animation.transform.position = transform.position + new Vector3(0.4f, 0.6f, 0);
+                }
             }
         }
-    }
-
-    public void setObjective(Vector2 newObjective){
-        this.goal = newObjective;
-        float angle = (Mathf.Atan2(goal.y-transform.position.y, goal.x- transform.position.x) * Mathf.Rad2Deg) -90f;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void PushInDirection(Vector2 pushVector, float pushForce) {

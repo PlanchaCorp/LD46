@@ -9,9 +9,12 @@ public class SpaceStationManager : MonoBehaviour
     protected float RESOURCE_GENERATION_FREQUENCY = 1f;
 
     [SerializeField]
-    public const float OXYGEN_INITIAL_AMOUNT = 100;
+    public float OXYGEN_INITIAL_AMOUNT = 250;
+
     [SerializeField]
-    public const float dodonium_INITIAL_AMOUNT = 15;
+    public float OXYGEN_MAX_AMOUNT = 300;
+    [SerializeField]
+    public const float DODONIUM_INITIAL_AMOUNT = 15;
 
     private List<MachineAbstract> machines;
 
@@ -19,8 +22,8 @@ public class SpaceStationManager : MonoBehaviour
 
 
     public int dodoAmount { get; set; }
-    private float oxygenAmount; // in L
-    private float dodoniumAmount; // in kg
+    public float oxygenAmount; // in L
+    public float dodoniumAmount; // in kg
     private float bufferedOxygen;
     private float bufferedDodonium;
 
@@ -29,7 +32,7 @@ public class SpaceStationManager : MonoBehaviour
     {
         dodoAmount = 1;
         oxygenAmount = OXYGEN_INITIAL_AMOUNT;
-        dodoniumAmount = dodonium_INITIAL_AMOUNT;
+        dodoniumAmount = DODONIUM_INITIAL_AMOUNT;
         machines = new List<MachineAbstract>();
         InvokeRepeating("Generate", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
     }
