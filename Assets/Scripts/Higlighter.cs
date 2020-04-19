@@ -28,14 +28,16 @@ public class Higlighter : MonoBehaviour
     void OnEnable()
     {
         transform.localScale = new Vector2(size, size);
-         obstructionObject = 0;
+        obstructionObject = 0;
+        GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = false;
     }
     void OnDisable(){
         placableElement = null;
+        GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = true;
     }
 
 
-    void Update()
+    void LateUpdate()
     {
         Vector3Int cell = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         Vector2 worldPos;
