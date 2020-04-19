@@ -5,13 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class Higlighter : MonoBehaviour
 {
-    public bool canPlace = false;
+    public int obstructionObject;
 
     public Grid grid;
     [SerializeField]
     Tilemap floorTilemap;
 
-    [Range(1,3)]
+    [Range(1, 3)]
     public int size;
 
     public GameObject placableElement;
@@ -21,47 +21,62 @@ public class Higlighter : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-         transform.localScale= new Vector2(size,size);
+        transform.localScale = new Vector2(size, size);
+        obstructionObject = 0;
     }
 
-    // Update is called once per frame
-    void OnEnable(){
-         transform.localScale= new Vector2(size,size);
-    }
-
-
-         void Update()
+    void OnEnable()
     {
-       Vector3Int cell = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-       Vector2 worldPos;
-       if( size % 2 != 0){
-       worldPos = floorTilemap.GetCellCenterWorld(cell);
-    } else {
-       worldPos = floorTilemap.CellToWorld(cell);
+        transform.localScale = new Vector2(size, size);
+         obstructionObject = 0;
     }
-       transform.position = worldPos;
-       if(Input.GetMouseButtonDown(0) && canPlace){
-           Instantiate(placableElement,worldPos,Quaternion.identity);
-       }
+
+
+    void Update()
+    {
+        Vector3Int cell = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector2 worldPos;
+        if (size % 2 != 0)
+        {
+            worldPos = floorTilemap.GetCellCenterWorld(cell);
+        }
+        else
+        {
+            worldPos = floorTilemap.CellToWorld(cell);
+        }
+        transform.position = worldPos;
+        if (Input.GetMouseButtonDown(0) && obstructionObject == 0)
+        {
+            Instantiate(placableElement, worldPos, Quaternion.identity);
+        }
     }
-     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.tag.Equals("Wall")){
-            canPlace = false;
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("enter");
+        if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
+        {
+            obstructionObject++;
             SetRed();
         }
     }
-    
-     void OnTriggerExit2D(Collider2D collision) {
-        if(collision.tag.Equals("Wall")){
-             canPlace = true;
-             setGreen();
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("exit");
+        if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
+        {
+            obstructionObject--;
+            if(obstructionObject == 0) {
+                setGreen();
+            }
         }
     }
-    void setGreen(){
-        Debug.Log("green");
-    spriteRenderer.color= Color.green;// new Color(100,188,108,132);
+    void setGreen()
+    {
+        spriteRenderer.color = new Color(100.0f/255.0f, 188f/255f, 108f/255f, 132f/255f);
     }
-    void SetRed(){
-        spriteRenderer.color= Color.red;// new Color(188,38,45,132);
+    void SetRed()
+    {
+        spriteRenderer.color = new Color(188f/255f, 38f/255f, 45f/255f, 132f/255f);
     }
 }

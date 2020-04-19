@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fa7fc7749f1e84592b5b426c6f4685, type: 3}
   m_Name: Recycler
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  size: 0
+  icon: {fileID: 21300000, guid: f3dd86dd21ff7061c8b17717ee3b3bc8, type: 3}
+  size: 2
+  element: {fileID: 8812764115643907247, guid: 4124165f8e5a82c46805aa35aea6a687, type: 3}
