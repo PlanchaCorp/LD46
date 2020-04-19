@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5263665123131762110}
   - component: {fileID: 1476134591}
   - component: {fileID: 8730301406922626305}
+  - component: {fileID: 622616451932547574}
   m_Layer: 0
   m_Name: Dodo
   m_TagString: Dodo
@@ -67,7 +68,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 4
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -112,7 +113,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -429467915
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 4805860825968847213, guid: 7c2922251d13919418f51b829f197267,
     type: 3}
@@ -155,7 +156,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luringMachine: {fileID: 0}
-  speed: 3
+  speed: 1.8
   hunger: 60
   mealTimeAgo: 0
   canMove: 1
+--- !u!70 &622616451932547574
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687221751350039216}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.3307102, y: 0.5524055}
+  m_Direction: 0

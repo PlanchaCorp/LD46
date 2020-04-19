@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     public float speed;
+    public float force = 150;
 
     [SerializeField]
     private Transform targetPoint;
@@ -21,10 +22,11 @@ public class BulletBehaviour : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider){
-        if(collider.tag.Equals("Dodo")){
+        if (collider.tag.Equals("Dodo")) {
             DodoManager dodoManager = collider.GetComponent<DodoManager>();
-            dodoManager.PushInDirection(targetPoint.position);
+            dodoManager.PushInDirection(targetPoint.position - transform.position, force);
         }
-        Destroy(gameObject);
+        if (collider.GetComponent<Rigidbody2D>() != null)
+            Destroy(gameObject);
     }
 }

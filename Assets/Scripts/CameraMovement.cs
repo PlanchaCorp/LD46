@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     public int BOUNDARY = 50;
     [SerializeField]
-    public int SPEED = 5;
+    public float MOVE_SPEED = 10;
+    [SerializeField]
+    public float ZOOM_SPEED = 40;
+    [SerializeField]
+    public float MAX_ZOOM = 4;
+    [SerializeField]
+    public float MIN_ZOOM = 10;
+    CinemachineVirtualCamera virtualCamera;
 
     private float screenWidth;
     private float screenHeight;
@@ -16,6 +23,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        virtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
         screenWidth = Screen.width;
         screenHeight = Screen.height;
     }
@@ -52,6 +60,15 @@ public class CameraMovement : MonoBehaviour
                 yDirection = -1;
             }
         }
-        transform.Translate(new Vector2(xDirection * SPEED * Time.deltaTime, yDirection * SPEED * Time.deltaTime));
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Max(virtualCamera.m_Lens.OrthographicSize - ZOOM_SPEED * Time.deltaTime, MAX_ZOOM);
+        } else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Min(virtualCamera.m_Lens.OrthographicSize + ZOOM_SPEED * Time.deltaTime, MIN_ZOOM);
+        }
+
+        transform.Translate(new Vector2(xDirection * MOVE_SPEED * Time.deltaTime, yDirection * MOVE_SPEED * Time.deltaTime));
     }
 }

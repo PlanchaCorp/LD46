@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class WanderingBehaviour : StateMachineBehaviour
 {
-    [SerializeField]
-    private float wanderingRadius;
-    [SerializeField]
-    private float minWaitingTime = 3;
-    [SerializeField]
-    private float maxWaitingTime = 7;
+    private float wanderingRadius = 2.0f;
+    private float minWaitingTime = 4;
+    private float maxWaitingTime = 8;
+    private float minMovingTime = 1;
+    private float maxMovingTime = 2.5f;
     private DodoManager dodoManager;
     private float nextMoveTime;
+    private float moveTime;
+    private Vector2 moveDirection;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         nextMoveTime = Time.time;
+        moveTime = Time.time;
         dodoManager = animator.GetComponent<DodoManager>();
     }
 
@@ -24,6 +26,7 @@ public class WanderingBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Wander();
+
         if (dodoManager.luringMachines.Count > 0)
         {
             foreach(LuringMachineAbstract machine in dodoManager.luringMachines)
@@ -58,15 +61,22 @@ public class WanderingBehaviour : StateMachineBehaviour
     public void Wander() {
         if (Time.time > nextMoveTime) {
             nextMoveTime += Random.Range(minWaitingTime, maxWaitingTime);
-            dodoManager.setObjective(GetNewGoal());  
+            moveTime = Time.time + Random.Range(minMovingTime, maxMovingTime);
+            moveDirection = (GetNewGoal() - dodoManager.transform.position).normalized;
+        }
+        if (Time.time < moveTime && dodoManager.canMove)
+        {
+            dodoManager.transform.Translate(moveDirection * Time.deltaTime * dodoManager.speed, Space.World);
+            float angle = Mathf.Atan2(-moveDirection.y, -moveDirection.x) * Mathf.Rad2Deg;
+            dodoManager.transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
         }
     }
     
-    private Vector2 GetNewGoal() {
-        Vector2 pos = dodoManager.GetComponent<Transform>().position;
+    private Vector3 GetNewGoal() {
+        Vector2 pos = dodoManager.transform.position;
         float angle = Random.Range(0,360);
         float x = Mathf.Cos(angle) * wanderingRadius;
         float y = Mathf.Sin(angle) * wanderingRadius;
-        return new Vector2(x,y) + pos;
+        return new Vector2(x, y) + pos;
     }
 }

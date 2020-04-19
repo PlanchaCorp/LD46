@@ -6,7 +6,7 @@ using UnityEngine;
 public class TurretBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private GameObject arrow;
+    private GameObject bullet;
     [SerializeField]
     private Transform cannon;
     private Camera mainCamera;
@@ -15,8 +15,8 @@ public class TurretBehaviour : MonoBehaviour
     public bool canFire;
     private Vector3 mousePos;
     // Start is called before the first frame update
-    public int nextPoint;
-    public int previousPoint;
+    private int nextPoint;
+    private int previousPoint;
 
     private Rigidbody2D rb;
     void Start()
@@ -24,8 +24,8 @@ public class TurretBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rail = GetComponentInParent<Rail>();
         mainCamera = Camera.main;
-        previousPoint = 0;
-        nextPoint = 1;
+        previousPoint = rail.waypoints.Length - 1;
+        nextPoint = 0;
         canFire = true;
         transform.position = (getPrevious() + getNext()) / 2;
     }
@@ -38,26 +38,26 @@ public class TurretBehaviour : MonoBehaviour
         Vector3 delta = mousePos - transform.position;
 
         Vector2 position2d = new Vector2(transform.position.x, transform.position.y);
-        float angleMin = Vector2.SignedAngle(getPrevious() - position2d, Vector2.right);
-        float angleMax = Vector2.SignedAngle(getNext() - position2d, Vector2.right);
+        float angleMin = Vector2.SignedAngle(position2d - getPrevious(), Vector2.right);
+        float angleMax = Vector2.SignedAngle(position2d - getNext(), Vector2.right);
         float willenAngle = Mathf.Atan2(delta.y, delta.x) * -Mathf.Rad2Deg;
 
         if (((willenAngle < angleMin - 90 && willenAngle > angleMin - 180) || (willenAngle > angleMax && willenAngle < angleMax + 90)))
             willenAngle = angleMax;
         else if (((willenAngle < angleMin && willenAngle > angleMin - 90) || (willenAngle > angleMax + 90 && willenAngle < angleMax + 180)))
             willenAngle = angleMin;
-        transform.rotation = Quaternion.AngleAxis(-willenAngle, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(-willenAngle - 90, Vector3.forward);
         if (Input.GetMouseButtonDown(0) && canFire)
         {
             Fire();
         }
         var newPos = Vector2.zero;
-        if (Input.GetAxis("TurretMovement") < 0)
+        if (Input.GetAxis("TurretMovement") > 0)
         {
             newPos = Vector2.MoveTowards(transform.position, getPrevious(), 10 * Time.deltaTime);
             rb.MovePosition(newPos);
 
-        } else if (Input.GetAxis("TurretMovement") > 0)
+        } else if (Input.GetAxis("TurretMovement") < 0)
         {
             newPos = Vector2.MoveTowards(transform.position, getNext(), 10 * Time.deltaTime);
             rb.MovePosition(newPos);
@@ -66,7 +66,7 @@ public class TurretBehaviour : MonoBehaviour
 
     private void Fire()
     {
-        Instantiate(arrow, cannon.position, cannon.rotation);
+        Instantiate(bullet, cannon.position, cannon.rotation);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

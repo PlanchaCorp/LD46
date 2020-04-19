@@ -19,7 +19,7 @@ TagManager:
   - 
   - 
   - Elements
-  - 
+  - ShootingRail
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Entities
     uniqueID: 3865499381
+    locked: 0
+  - name: Turret
+    uniqueID: 1198604263
     locked: 0
   - name: Overlay
     uniqueID: 614821893

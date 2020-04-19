@@ -14,7 +14,7 @@ public class DodoManager : MonoBehaviour
     public LuringMachineAbstract luringMachine;
 
     [SerializeField]
-    private float speed;
+    public float speed = 1;
     [SerializeField]
     public float hunger = 0; // Hunger ratio, from 0 (no hunger) to 1.2 (death)
     [SerializeField]
@@ -24,8 +24,6 @@ public class DodoManager : MonoBehaviour
     private Rigidbody2D rb;
 
     private Vector2 goal;
-
-    private Vector2 pushVector;
 
     public bool canMove = true;
 
@@ -45,10 +43,6 @@ public class DodoManager : MonoBehaviour
 
     void Update() {
         hunger += HUNGER_INCREASE * Time.deltaTime;
-        if(canMove) {
-            Vector2 newPos = Vector2.MoveTowards(transform.position,goal, speed * Time.deltaTime);
-            rb.MovePosition(newPos);
-        } 
         if (mealTimeAgo > 0)
         {
             mealTimeAgo += Time.deltaTime;
@@ -67,22 +61,20 @@ public class DodoManager : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public void PushInDirection(Vector2 pushVector){
-        this.pushVector = pushVector;
+    public void PushInDirection(Vector2 pushVector, float pushForce) {
+        rb.AddForce(pushVector.normalized * pushForce);
         stateMachine.SetTrigger("stun");
-        goal = pushVector;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
         if(collision.CompareTag("Conveyer")){
-            stateMachine.SetBool("Conveyed",true);
+            stateMachine.SetBool("Conveyed", true);
         }
         LuringMachineAbstract machine = collision.gameObject.GetComponentInParent<LuringMachineAbstract>();
         if (machine != null)
         {
-        Debug.Log(machine.name);
             luringMachines.Add(machine);
         }
     }
@@ -97,7 +89,7 @@ public class DodoManager : MonoBehaviour
                 luringMachines.Remove(machine);
             }
         }
-           if(collision.CompareTag("Conveyer")){
+        if(collision.CompareTag("Conveyer")) {
             stateMachine.SetBool("Conveyed",false);
         }
     }
