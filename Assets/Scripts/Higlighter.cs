@@ -14,6 +14,8 @@ public class Higlighter : MonoBehaviour
     [Range(1,3)]
     public int size;
 
+    public GameObject placableElement;
+
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,10 @@ public class Higlighter : MonoBehaviour
     } else {
        worldPos = floorTilemap.CellToWorld(cell);
     }
-       Debug.Log(worldPos);
        transform.position = worldPos;
+       if(Input.GetMouseButtonDown(0) && canPlace){
+           Instantiate(placableElement,worldPos,Quaternion.identity);
+       }
     }
      void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag.Equals("Wall")){
