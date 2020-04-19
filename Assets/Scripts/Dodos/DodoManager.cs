@@ -76,6 +76,9 @@ public class DodoManager : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
+        if(collision.CompareTag("Conveyer")){
+            stateMachine.SetBool("Conveyed",true);
+        }
         LuringMachineAbstract machine = collision.gameObject.GetComponentInParent<LuringMachineAbstract>();
         if (machine != null)
         {
@@ -93,6 +96,9 @@ public class DodoManager : MonoBehaviour
             {
                 luringMachines.Remove(machine);
             }
+        }
+           if(collision.CompareTag("Conveyer")){
+            stateMachine.SetBool("Conveyed",false);
         }
     }
 }
