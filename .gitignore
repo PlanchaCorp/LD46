@@ -52,14 +52,14 @@ ExportedObj/
 *.VC.db
 
 # Unity3D generated meta files
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
+#*.pidb.meta
+#*.pdb.meta
+#*.mdb.meta
 
 #Ignore all .meta file
-*.meta
+#*.meta
 #But not source file with postfix. which is everything but a folder
-!*.*.meta
+#!*.*.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
