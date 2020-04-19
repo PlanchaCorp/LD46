@@ -26,6 +26,7 @@ public class TurretBehaviour : MonoBehaviour
         mainCamera = Camera.main;
         previousPoint = 0;
         nextPoint = 1;
+        canFire = true;
         transform.position = (getPrevious() + getNext()) / 2;
     }
 
@@ -78,7 +79,6 @@ public class TurretBehaviour : MonoBehaviour
         {
             GoToPreviousWaypoint();
         }
-        Debug.Log("Between " + previousPoint + " and " + nextPoint);
     }
 
     private void GoToNextWaypoint()
