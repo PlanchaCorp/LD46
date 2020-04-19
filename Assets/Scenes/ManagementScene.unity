@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2756484819460862156, guid: 1907ecad1da9986468d45bbe0afa1b0f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5263665123131762110, guid: 1907ecad1da9986468d45bbe0afa1b0f,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -261,6 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2239373588977310333, guid: 1907ecad1da9986468d45bbe0afa1b0f, type: 3}
+    - {fileID: 6569800301310213629, guid: 1907ecad1da9986468d45bbe0afa1b0f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1907ecad1da9986468d45bbe0afa1b0f, type: 3}
 --- !u!95 &92440906 stripped
 Animator:
