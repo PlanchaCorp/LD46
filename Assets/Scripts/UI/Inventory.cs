@@ -32,12 +32,19 @@ public class Inventory : MonoBehaviour
         highlight.placableElement = placable.element;
         highlight.gameObject.SetActive(true);
     }
-    void Update(){
+    void Update()
+    {
         for(int i =1;i<=placables.Length; i++){
-            if(Input.GetButtonDown("Hotkey"+ i )){
-                Debug.Log("button pressed" + i);
+            if(Input.GetButtonDown("Hotkey"+ i ))
+            {
                 slots[i-1].GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
             }
+        }
+        if (Input.GetButtonDown("Delete"))
+        {
+            highlight.size = new Vector2(1, 1);
+            highlight.placableElement = null;
+            highlight.gameObject.SetActive(true);
         }
     }
 }

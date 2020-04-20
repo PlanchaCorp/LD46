@@ -6,7 +6,7 @@ using Cinemachine;
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
-    public int BOUNDARY = 50;
+    public int BOUNDARY = 5;
     [SerializeField]
     public float MOVE_SPEED = 10;
     [SerializeField]

@@ -12,9 +12,11 @@ public class Highlighter : MonoBehaviour
     Tilemap floorTilemap;
 
     public Vector2 size;
+    private float angle;
 
     public GameObject placableElement;
     private UiDisplay uiDisplay;
+    private List<GameObject> collisions;
 
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
@@ -24,15 +26,23 @@ public class Highlighter : MonoBehaviour
 
     void OnEnable()
     {
+        angle = 0;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = placableElement != null;
         transform.localScale = size;
         obstructionObject = 0;
+        collisions = new List<GameObject>();
         uiDisplay.UpdateCursor();
     }
     void OnDisable(){
         placableElement = null;
         uiDisplay.UpdateCursor();
+    }
+
+    void Disable() {
+        gameObject.SetActive(false);
     }
 
 
@@ -45,38 +55,61 @@ public class Highlighter : MonoBehaviour
         if (size.y % 2 != 0)
             worldPos.y += 0.5f;
         transform.position = worldPos;
-        if (Input.GetMouseButtonDown(0) && obstructionObject == 0)
+        if (placableElement != null)
         {
-            Instantiate(placableElement, worldPos, Quaternion.identity);
-            gameObject.SetActive(false);
+            if (Input.GetMouseButtonDown(0) && obstructionObject == 0)
+            {
+                Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle + 90, Vector3.forward));
+                if (!placableElement.CompareTag("Conveyer"))
+                    Invoke("Disable", 0.1f);
+            }
+            if (Input.GetButtonDown("Rotate")) {
+                angle -= 90;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
+        } else
+        {
+            if (Input.GetMouseButtonDown(0) && collisions.Count > 0)
+            {
+                GameObject removedObject = collisions[0];
+                bool isConveyer = removedObject.CompareTag("Conveyer");
+                collisions.Remove(removedObject);
+                Destroy(removedObject);
+                if (!isConveyer)
+                    Invoke("Disable", 0.1f);
+            }
         }
         if (Input.GetMouseButton(1))
         {
-            gameObject.SetActive(false);
+            Invoke("Disable", 0.1f);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
+        if (collision.CompareTag("Wall") || collision.CompareTag("Dodo") || collision.CompareTag("Machine") || collision.CompareTag("Conveyer"))
         {
             obstructionObject++;
             SetRed();
+            if (collision.CompareTag("Machine") || collision.CompareTag("Conveyer"))
+                collisions.Add(collision.gameObject);
         }
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
+        if (collision.CompareTag("Wall") || collision.CompareTag("Dodo") || collision.CompareTag("Machine") || collision.CompareTag("Conveyer"))
         {
             obstructionObject--;
             if(obstructionObject == 0) {
                 setGreen();
             }
+            if (collisions.Contains(collision.gameObject))
+                collisions.Remove(collision.gameObject);
         }
     }
     void setGreen()
     {
-        spriteRenderer.color = new Color(100.0f/255.0f, 188f/255f, 108f/255f, 132f/255f);
+        spriteRenderer.color = new Color(60.0f/255.0f, 222f/255f, 88f/255f, 162f/255f);
     }
     void SetRed()
     {
