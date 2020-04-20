@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: Placeable
+  m_Name: Incubator
   m_EditorClassIdentifier: Assembly-CSharp::PlaceableElement
-  icon: {fileID: 0}
-  size: {x: 0, y: 0}
-  element: {fileID: 0}
+  icon: {fileID: 21300000, guid: 65bcab7ed12e36972a3ae4ca60111220, type: 3}
+  size: {x: 2, y: 2}
+  element: {fileID: 5906866268569703132, guid: f63b95492824c4ba99d76b0271b1b714, type: 3}

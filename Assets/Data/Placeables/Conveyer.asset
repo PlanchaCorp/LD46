@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Conveyer
   m_EditorClassIdentifier: Assembly-CSharp::PlaceableElement
-  icon: {fileID: 0}
-  size: {x: 0, y: 0}
-  element: {fileID: 0}
+  icon: {fileID: -8838008803906102854, guid: fc5f19a7629abc04b9a07655138ad801, type: 3}
+  size: {x: 1, y: 1}
+  element: {fileID: 2495484736189532303, guid: ac7da4799fc86834f8471961f9490223, type: 3}
