@@ -24,16 +24,14 @@ public class Highlighter : MonoBehaviour
 
     void OnEnable()
     {
-        uiDisplay = GetComponentInParent<UiDisplay>();
+        uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.localScale = size;
         obstructionObject = 0;
-        GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = false;
         uiDisplay.UpdateCursor();
     }
     void OnDisable(){
         placableElement = null;
-        GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = true;
         uiDisplay.UpdateCursor();
     }
 

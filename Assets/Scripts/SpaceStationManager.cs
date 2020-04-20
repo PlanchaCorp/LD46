@@ -15,6 +15,8 @@ public class SpaceStationManager : MonoBehaviour
     public float OXYGEN_MAX_AMOUNT = 300;
     [SerializeField]
     public const float DODONIUM_INITIAL_AMOUNT = 15;
+    [SerializeField]
+    public GameObject dodoPrefab;
 
     private List<MachineAbstract> machines;
 
@@ -44,7 +46,8 @@ public class SpaceStationManager : MonoBehaviour
 
     public void AddDodo(MachineAbstract birthPlace)
     {
-        
+        dodoAmount++;
+        Instantiate(dodoPrefab, birthPlace.transform);
     }
     /// The station is receiving resources which will be waiting to be inserted into the station systems
     public void BufferOxygen(float oxygen)

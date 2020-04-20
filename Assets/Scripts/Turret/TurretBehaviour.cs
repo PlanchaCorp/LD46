@@ -14,7 +14,7 @@ public class TurretBehaviour : MonoBehaviour
     private Camera mainCamera;
 
     private Rail rail;
-    public bool canFire;
+    private UiDisplay uiDisplay;
     private Vector3 mousePos;
     // Start is called before the first frame update
     private int nextPoint;
@@ -23,12 +23,12 @@ public class TurretBehaviour : MonoBehaviour
     private Rigidbody2D rb;
     void Start()
     {
+        uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         rb = GetComponent<Rigidbody2D>();
         rail = GetComponentInParent<Rail>();
         mainCamera = Camera.main;
         previousPoint = rail.waypoints.Length - 1;
         nextPoint = 0;
-        canFire = true;
         transform.position = (getPrevious() + getNext()) / 2;
     }
 
@@ -49,7 +49,7 @@ public class TurretBehaviour : MonoBehaviour
         else if (((willenAngle < angleMin && willenAngle > angleMin - 90) || (willenAngle > angleMax + 90 && willenAngle < angleMax + 180)))
             willenAngle = angleMin;
         transform.rotation = Quaternion.AngleAxis(-willenAngle - 90, Vector3.forward);
-        if (Input.GetMouseButtonDown(0) && canFire)
+        if (Input.GetMouseButtonDown(0) && uiDisplay.TurretCanShoot())
         {
             Fire();
         }
