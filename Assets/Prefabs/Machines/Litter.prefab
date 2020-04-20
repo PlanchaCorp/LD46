@@ -259,7 +259,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1512153, y: 1.1512153}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &1681245405337361012
 MonoBehaviour:
@@ -278,8 +278,8 @@ MonoBehaviour:
   - {fileID: 1681245405787147920}
   - {fileID: 1681245403828138649}
   - {fileID: 1681245404325374613}
+  occupyingDodos: []
   occupationTime: 0
-  recycler: {fileID: 0}
 --- !u!1 &1681245405787147921
 GameObject:
   m_ObjectHideFlags: 0

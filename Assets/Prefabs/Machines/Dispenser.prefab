@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 8293365303748832153}
   - {fileID: 8293365303353159573}
   - {fileID: 8293365304010837266}
+  occupyingDodos: []
   occupationTime: 0
 --- !u!50 &8293365303685942205
 Rigidbody2D:

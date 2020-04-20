@@ -19,7 +19,9 @@ public class TurretBehaviour : MonoBehaviour
     private UiDisplay uiDisplay;
     private Vector3 mousePos;
     // Start is called before the first frame update
+    [SerializeField]
     private int nextPoint;
+    [SerializeField]
     private int previousPoint;
     private float nextShootingTime;
 
@@ -91,12 +93,12 @@ public class TurretBehaviour : MonoBehaviour
     private void GoToNextWaypoint()
     {
         previousPoint = nextPoint;
-        nextPoint = (nextPoint == rail.waypoints.Length - 1) ? 0 : ++nextPoint;
+        nextPoint = (nextPoint == rail.waypoints.Length - 1) ? 0 : nextPoint + 1;
     }
     private void GoToPreviousWaypoint()
     {
         nextPoint = previousPoint;
-        previousPoint = (previousPoint == 0) ? rail.waypoints.Length - 1 : --previousPoint;
+        previousPoint = (previousPoint == 0) ? rail.waypoints.Length - 1 : previousPoint - 1;
     }
 
     private Vector3 getPrevious()

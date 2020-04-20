@@ -156,10 +156,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luringMachine: {fileID: 0}
+  machineOccupationId: 0
   speed: 1.8
-  hunger: 60
-  mealTimeAgo: 35
-  canMove: 1
+  hunger: 10
+  mealTimeAgo: 0
+  readyToEgg: 0
+  canMove: 0
+  hungerAnimationProgress: 0
 --- !u!70 &622616451932547574
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
