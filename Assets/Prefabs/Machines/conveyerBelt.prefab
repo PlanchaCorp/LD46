@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2495484736189532300}
   - component: {fileID: 2495484736189532301}
   - component: {fileID: 2495484736189532302}
+  - component: {fileID: 7683833798674915304}
   m_Layer: 0
   m_Name: conveyerBelt
   m_TagString: Conveyer
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -817606657
   m_SortingLayer: 1
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 2683165606532980809, guid: 78a92b6fd7cc3454f972a0f2eb1f7aef,
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -8838008803906102854, guid: fc5f19a7629abc04b9a07655138ad801,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!249 &2495484736189532301
@@ -98,8 +99,8 @@ AreaEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
-  m_ForceAngle: 90
-  m_ForceMagnitude: 3
+  m_ForceAngle: 0
+  m_ForceMagnitude: 6
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_Drag: 0
@@ -117,7 +118,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0060399175, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,5 +129,24 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5288855, y: 1}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &7683833798674915304
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495484736189532303}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a5064d3078336bb48a0da2350d301c7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
