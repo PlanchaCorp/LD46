@@ -15,13 +15,22 @@ public class Highlighter : MonoBehaviour
     private float angle;
 
     public GameObject placableElement;
+    public float placablePrice;
     private UiDisplay uiDisplay;
     private List<GameObject> collisions;
 
     private SpriteRenderer spriteRenderer;
+    private SpaceStationManager spaceStationManager;
     // Start is called before the first frame update
     void Start()
     {
+        GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
+        if (spaceStation == null)
+        {
+            Debug.LogError("Unable to find SpaceStation gameObject to initialize inventory!");
+            return;
+        }
+        spaceStationManager = spaceStation.GetComponent<SpaceStationManager>();
     }
 
     void OnEnable()
@@ -59,9 +68,16 @@ public class Highlighter : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && obstructionObject == 0)
             {
-                Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle + 90, Vector3.forward));
-                if (!placableElement.CompareTag("Conveyer"))
-                    Invoke("Disable", 0.1f);
+                if (placablePrice <= spaceStationManager.dodoniumAmount)
+                {
+                    Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle + 90, Vector3.forward));
+                    if (!placableElement.CompareTag("Conveyer"))
+                        Invoke("Disable", 0.1f);
+                    spaceStationManager.dodoniumAmount -= placablePrice;
+                } else {
+                    Debug.Log("You lack resources!");
+                    // TODO: Add feedback for missing resources
+                }
             }
             if (Input.GetButtonDown("Rotate")) {
                 angle -= 90;

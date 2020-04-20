@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     public PlaceableElement[] placables;
 
+    private SpaceStationManager spaceStationManager;
+
     void Start()
     {
         for (int i = 0; i < slots.Length; i++) {
@@ -26,11 +28,25 @@ public class Inventory : MonoBehaviour
                
             }
         }
+        GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
+        if (spaceStation == null)
+        {
+            Debug.LogError("Unable to find SpaceStation gameObject to initialize inventory!");
+            return;
+        }
+        spaceStationManager = spaceStation.GetComponent<SpaceStationManager>();
     }
-    public void OnSlotClick(PlaceableElement placable){
-        highlight.size = placable.size;
-        highlight.placableElement = placable.element;
-        highlight.gameObject.SetActive(true);
+    public void OnSlotClick(PlaceableElement placable) {
+        if (placable.price < spaceStationManager.dodoniumAmount)
+        {
+            highlight.size = placable.size;
+            highlight.placableElement = placable.element;
+            highlight.placablePrice = placable.price;
+            highlight.gameObject.SetActive(true);
+        } else {
+            Debug.Log("You lack resources!");
+            // TODO: Add feedback for missing resources
+        }
     }
     void Update()
     {

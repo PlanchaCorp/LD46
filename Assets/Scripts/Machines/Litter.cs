@@ -8,9 +8,6 @@ public class Litter : LuringMachineAbstract
     public const float MAX_DODONIUM_STORAGE = 20;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 1;
 
-    [SerializeField]
-    private Recycler recycler;
-
     protected override void Start()
     {
         base.Start();
@@ -28,15 +25,17 @@ public class Litter : LuringMachineAbstract
     /// Preventing default production behaviour to send to the litter instead
     public override void Produce() 
     {
-        if (recycler != null)
+        if (productionAccumulatedTime >= resourceProductionFrequency && dodoniumAccumulated > 0)
         {
-            if (productionAccumulatedTime >= resourceProductionFrequency && dodoniumAccumulated > 0)
+            float unconsumedTime = productionAccumulatedTime % resourceProductionFrequency;
+            float recyclerPartitionAmount = dodoniumAccumulated / spaceStationManager.recyclers.Count;
+            float remainingDodonium = 0;
+            foreach (Recycler recycler in spaceStationManager.recyclers)
             {
-                float unconsumedTime = productionAccumulatedTime % resourceProductionFrequency;
-                float remainingDodonium = recycler.SendToRecycler(dodoniumAccumulated);
-                productionAccumulatedTime = unconsumedTime;
-                dodoniumAccumulated = remainingDodonium;
+                remainingDodonium += recycler.SendToRecycler(recyclerPartitionAmount);
             }
+            productionAccumulatedTime = unconsumedTime;
+            dodoniumAccumulated = remainingDodonium;
         }
         // TODO: If no recycler attached, produce a nice animation
     }

@@ -9,4 +9,5 @@ public class PlaceableElement : ScriptableObject
     public Vector2 size;
 
     public GameObject element;
+    public float price;
 }
