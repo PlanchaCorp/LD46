@@ -24,10 +24,17 @@ public class WanderingBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Wander();
-        if (dodoManager.luringMachines.Count > 0 && dodoManager.luringMachines[0].IsDodoLured(dodoManager))
+        if (dodoManager.luringMachines.Count > 0)
         {
-            dodoManager.luringMachine = dodoManager.luringMachines[0];
-            dodoManager.stateMachine.SetTrigger("lure");
+            foreach(LuringMachineAbstract machine in dodoManager.luringMachines)
+            {
+                if (machine.IsDodoLured(dodoManager))
+                {
+                    dodoManager.luringMachine = machine;
+                    dodoManager.stateMachine.SetTrigger("lure");
+                    return;
+                }
+            }
         }
     }
 

@@ -48,3 +48,6 @@ TagManager:
   - name: Entities
     uniqueID: 3865499381
     locked: 0
+  - name: Overlay
+    uniqueID: 614821893
+    locked: 0

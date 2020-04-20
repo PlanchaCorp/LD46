@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Litter : LuringMachineAbstract
 {
-    public const float RELAX_TIME = 5.0f;
+    public const float RELAX_TIME = 2.5f;
     public const float MAX_DODONIUM_STORAGE = 20;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 1;
 
@@ -55,6 +55,15 @@ public class Litter : LuringMachineAbstract
         {
             dodoniumAccumulated = maxDodoniumStorage;
         }
+
+        GameObject animation = Instantiate(Resources.Load<GameObject>("RelaxAnimation"));
+        if (animation == null) {
+            Debug.LogError("Could not find RelaxAnimation prefab in Resources folder!");
+        } else {
+            animation.transform.parent = transform;
+            animation.transform.position = dodo.transform.position + new Vector3(0.4f, 0.6f, 0);
+        }
+
         dodosPresent.Remove(dodo);
     }
 }

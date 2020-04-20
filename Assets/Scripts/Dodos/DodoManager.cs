@@ -76,14 +76,12 @@ public class DodoManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject machineObject = collision.gameObject.GetComponentInParent<Transform>().gameObject;
-        if (machineObject.CompareTag("Machine"))
+        Debug.Log(collision.gameObject.name);
+        LuringMachineAbstract machine = collision.gameObject.GetComponentInParent<LuringMachineAbstract>();
+        if (machine != null)
         {
-            LuringMachineAbstract machine = machineObject.GetComponent<LuringMachineAbstract>();
-            if (machine != null)
-            {
-                luringMachines.Add(machine);
-            }
+        Debug.Log(machine.name);
+            luringMachines.Add(machine);
         }
     }
     void OnTriggerExit2D(Collider2D collision)

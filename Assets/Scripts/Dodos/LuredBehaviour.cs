@@ -14,6 +14,7 @@ public class LuredBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        occupationFinishTime = 0;
         dodoManager = animator.GetComponent<DodoManager>();
         luringMachine = dodoManager.luringMachine;
         Transform machineChild  = luringMachine.transform.GetChild(0);
