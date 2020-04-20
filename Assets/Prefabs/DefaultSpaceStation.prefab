@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7920289288035963776}
   - component: {fileID: 7920289288035963807}
   m_Layer: 0
-  m_Name: SpaceStation
+  m_Name: DefaultSpaceStation
   m_TagString: SpaceStation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RESOURCE_GENERATION_FREQUENCY: 0.5
+  OXYGEN_INITIAL_AMOUNT: 250
+  OXYGEN_MAX_AMOUNT: 300
+  oxygenAmount: 0
+  dodoniumAmount: 0
 --- !u!60 &7920289288035963807
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4262,7 +4266,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7920289288615588435}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

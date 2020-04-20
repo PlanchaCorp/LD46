@@ -19,6 +19,8 @@ public class DodoManager : MonoBehaviour
     public float hunger = 0; // Hunger ratio, from 0 (no hunger) to 1.2 (death)
     [SerializeField]
     public float mealTimeAgo = 0; // Time since the dodo has last eaten, if he needs to go to the litter
+    [SerializeField]
+    public float readyToEgg = 0; // When reaching 0, dodo is ready to lay an egg
 
     public Animator stateMachine { get; set; }
     private Rigidbody2D rb;
@@ -41,6 +43,8 @@ public class DodoManager : MonoBehaviour
 
     void Update() {
         hunger += HUNGER_INCREASE * Time.deltaTime;
+        if (mealTimeAgo < RELAX_TIME_MAX / 3)
+            readyToEgg = Mathf.Max(readyToEgg + Time.deltaTime, 1);
         if (mealTimeAgo > 0)
         {
             mealTimeAgo += Time.deltaTime;
@@ -66,7 +70,6 @@ public class DodoManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if(collision.CompareTag("Conveyer")){
             stateMachine.SetBool("Conveyed", true);
         }

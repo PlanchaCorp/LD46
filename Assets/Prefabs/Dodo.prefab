@@ -158,7 +158,7 @@ MonoBehaviour:
   luringMachine: {fileID: 0}
   speed: 1.8
   hunger: 60
-  mealTimeAgo: 0
+  mealTimeAgo: 35
   canMove: 1
 --- !u!70 &622616451932547574
 CapsuleCollider2D:
