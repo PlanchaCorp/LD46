@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Oxygenerator
   m_EditorClassIdentifier: Assembly-CSharp::PlaceableElement
   icon: {fileID: 21300000, guid: 5c559776cbd51f4d09f4cfb0fd7cd53e, type: 3}
-  size: 3
+  size: {x: 3, y: 2}
   element: {fileID: 6935518209082846423, guid: 0c7806f6b70f340f1babe9388312f384, type: 3}

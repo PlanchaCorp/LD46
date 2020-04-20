@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dispenser
   m_EditorClassIdentifier: Assembly-CSharp::PlaceableElement
   icon: {fileID: 21300000, guid: 238b0e867f6c063ad84e10f1b65b9ecc, type: 3}
-  size: 2
+  size: {x: 2, y: 2}
   element: {fileID: 8293365303685942198, guid: a548eaa379b75a043a6716a7d2e1e39d, type: 3}
