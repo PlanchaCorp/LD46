@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 372957811}
   - component: {fileID: 372957810}
   - component: {fileID: 7189710031700152764}
+  - component: {fileID: 372957813}
   m_Layer: 5
   m_Name: Slot (1)
   m_TagString: Untagged
@@ -130,6 +131,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &372957813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372957808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ddbe832202caf55a61528d1261e224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDisplay: {fileID: 5173424763257799783}
+  type: 1
 --- !u!1 &458510095
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +230,7 @@ GameObject:
   - component: {fileID: 469737604}
   - component: {fileID: 469737603}
   - component: {fileID: 7702306579785591403}
+  - component: {fileID: 469737606}
   m_Layer: 5
   m_Name: Slot (2)
   m_TagString: Untagged
@@ -333,6 +349,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &469737606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469737601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ddbe832202caf55a61528d1261e224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDisplay: {fileID: 5173424763257799783}
+  type: 1
 --- !u!1 &976732592
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +464,7 @@ GameObject:
   - component: {fileID: 992832918}
   - component: {fileID: 992832917}
   - component: {fileID: 4831707258611533002}
+  - component: {fileID: 992832920}
   m_Layer: 5
   m_Name: Slot (3)
   m_TagString: Untagged
@@ -552,6 +583,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &992832920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992832915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ddbe832202caf55a61528d1261e224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDisplay: {fileID: 5173424763257799783}
+  type: 1
 --- !u!1 &1125878355
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +697,6 @@ GameObject:
   - component: {fileID: 1225144629}
   - component: {fileID: 1225144628}
   - component: {fileID: 1225144630}
-  - component: {fileID: 8344852289210381101}
   - component: {fileID: 1225144631}
   m_Layer: 5
   m_Name: Slot
@@ -772,34 +816,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8344852289210381101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225144626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5173424763257799778}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1225144631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,25 +825,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1225144626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ddbe832202caf55a61528d1261e224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  uiDisplay: {fileID: 5173424763257799783}
+  type: 1
 --- !u!1 &1839694326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,9 +1814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a324e554f6c461188ae6f2b23836a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCursor: {fileID: 0}
-  ordinaryCursor: {fileID: 0}
-  discreteCursor: {fileID: 0}
+  activeCursor: {fileID: 2800000, guid: 7dc61b5b35845f7b99a6d82ea91ffc9b, type: 3}
+  ordinaryCursor: {fileID: 2800000, guid: 43519c57aa930d9a29528a70fa2ec053, type: 3}
+  shootCursor: {fileID: 2800000, guid: 3739cede025fd5c4ebbb3cafaf65a8d0, type: 3}
+  discreteCursor: {fileID: 2800000, guid: 0a5e62787c29c8a9da8fed31d289b55d, type: 3}
   oxygenBar: {fileID: 5173424764625967972}
   dodoniumAmount: {fileID: 1872441691}
 --- !u!1 &5173424763641686964

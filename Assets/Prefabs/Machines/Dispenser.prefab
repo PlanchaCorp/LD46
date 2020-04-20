@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 8293365303685942201}
   - component: {fileID: 8293365303685942205}
   - component: {fileID: 8293365303685942200}
+  - component: {fileID: 1758218993}
   m_Layer: 0
   m_Name: Dispenser
   m_TagString: Machine
@@ -264,6 +265,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.55603945
+--- !u!114 &1758218993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293365303685942198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ddbe832202caf55a61528d1261e224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDisplay: {fileID: 0}
+  type: 2
 --- !u!1 &8293365303748832150
 GameObject:
   m_ObjectHideFlags: 0

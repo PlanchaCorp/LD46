@@ -23,6 +23,7 @@ public class UiDisplay : MonoBehaviour
 
     private int cursorButtonAmount = 0;
     private bool cursorHoverGround = false;
+    private bool cursorHoverMachine = false;
 
     // Start is called before the first frame update
     void Start()
@@ -68,15 +69,27 @@ public class UiDisplay : MonoBehaviour
         cursorHoverGround = false;
         UpdateCursor();
     }
+    public void CursorEntersMachine()
+    {
+        cursorHoverMachine = true;
+        UpdateCursor();
+    }
+    public void CursorLeavesMachine()
+    {
+        cursorHoverMachine = false;
+        UpdateCursor();
+    }
     public void UpdateCursor()
     {
-        if (cursorButtonAmount > 0)
-            Cursor.SetCursor(activeCursor, Vector2.zero, CursorMode.Auto);
+        if (cursorButtonAmount > 0) {
+            Cursor.SetCursor(activeCursor, new Vector2(26.5f, 20), CursorMode.ForceSoftware); }
         else if (inventory.highlight.gameObject.activeSelf)
-            Cursor.SetCursor(discreteCursor, Vector2.zero, CursorMode.Auto);
-        else if (cursorHoverGround)
-            Cursor.SetCursor(shootCursor, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(discreteCursor, new Vector2(32, 32), CursorMode.ForceSoftware);
+        else if (cursorHoverMachine) {
+            Cursor.SetCursor(activeCursor, new Vector2(26.5f, 20), CursorMode.ForceSoftware); }
+        else if (cursorHoverGround) {
+            Cursor.SetCursor(shootCursor, new Vector2(32, 32), CursorMode.ForceSoftware); }
         else
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(ordinaryCursor, new Vector2(24, 20), CursorMode.ForceSoftware);
     }
 }
