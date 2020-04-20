@@ -22,7 +22,7 @@ public class Litter : LuringMachineAbstract
 
     public override bool IsDodoLured(DodoManager dodo)
     {
-        return dodo.mealTimeAgo > 0;
+        return dodo.mealTimeAgo > 0 && base.IsDodoLured(dodo);
     }
 
     /// Preventing default production behaviour to send to the litter instead

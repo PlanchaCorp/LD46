@@ -23,7 +23,7 @@ public class Dispenser : LuringMachineAbstract
 
     public override bool IsDodoLured(DodoManager dodo)
     {
-        return dodo.hunger > DodoManager.DODO_HUNGER;
+        return dodo.hunger > DodoManager.DODO_HUNGER && foodServed > dodosPresent.Count && base.IsDodoLured(dodo);
     }
 
     protected override void OnMouseDown()
@@ -39,10 +39,11 @@ public class Dispenser : LuringMachineAbstract
     }
 
     /// Host a dodo that came eat for the given amount of time
-    public override void StartInteraction(DodoManager dodo)
+    public override bool StartInteraction(DodoManager dodo)
     {
-        if (foodServed > dodosPresent.Count)
-            base.StartInteraction(dodo);
+        if (dodo.hunger > DodoManager.DODO_HUNGER && foodServed > dodosPresent.Count)
+            return base.StartInteraction(dodo);
+        return false;
     }
     /// Bid farewell to a dodo that finished eating
     public override void FinishInteraction(DodoManager dodo) 

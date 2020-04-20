@@ -14,6 +14,7 @@ public class DodoManager : MonoBehaviour
     public List<LuringMachineAbstract> luringMachines { get; set; }
     [HideInInspector]
     public LuringMachineAbstract luringMachine;
+    public int machineOccupationId;
 
     [SerializeField]
     public float speed = 1;
@@ -30,11 +31,14 @@ public class DodoManager : MonoBehaviour
     public bool canMove = true;
     public int hungerAnimationProgress = 0;
 
+    private int onConveyer;
+
     void Start()
     {
         hungerAnimationProgress = 0;
         stateMachine = GetComponent<Animator>();
         luringMachines = new List<LuringMachineAbstract>();
+        machineOccupationId = 0;
         rb = GetComponent<Rigidbody2D>();
         GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
         if (spaceStation == null)
@@ -79,7 +83,8 @@ public class DodoManager : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Conveyer")){
-            stateMachine.SetBool("Conveyed", true);
+            stateMachine.SetBool("Conveyed",true);
+           onConveyer ++;
         }
         LuringMachineAbstract machine = collision.gameObject.GetComponentInParent<LuringMachineAbstract>();
         if (machine != null)
@@ -99,6 +104,10 @@ public class DodoManager : MonoBehaviour
             }
         }
         if(collision.CompareTag("Conveyer")) {
+            onConveyer--;
+            
+        }
+        if(onConveyer == 0){
             stateMachine.SetBool("Conveyed",false);
         }
     }
