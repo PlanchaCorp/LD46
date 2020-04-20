@@ -92,4 +92,9 @@ public class UiDisplay : MonoBehaviour
         else
             Cursor.SetCursor(ordinaryCursor, new Vector2(24, 20), CursorMode.ForceSoftware);
     }
+
+    public bool TurretCanShoot()
+    {
+        return cursorButtonAmount == 0 && !inventory.highlight.gameObject.activeSelf && !cursorHoverMachine && cursorHoverGround;
+    }
 }

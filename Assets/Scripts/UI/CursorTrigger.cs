@@ -5,11 +5,14 @@ using UnityEngine;
 public class CursorTrigger : MonoBehaviour
 {
     enum Type { Ground, Button, Machine }
-    [SerializeField]
     private UiDisplay uiDisplay;
     [SerializeField]
     private Type type = Type.Ground;
 
+    void Start()
+    {
+        uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
+    }
     void OnMouseEnter()
     {
         if (type == Type.Ground )
