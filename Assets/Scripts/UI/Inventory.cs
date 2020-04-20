@@ -42,6 +42,7 @@ public class Inventory : MonoBehaviour
             highlight.size = placable.size;
             highlight.placableElement = placable.element;
             highlight.placablePrice = placable.price;
+            highlight.transform.localScale = placable.size;
             highlight.gameObject.SetActive(true);
         } else {
             Debug.Log("You lack resources!");
