@@ -27,7 +27,24 @@ public class LuredBehaviour : StateMachineBehaviour
             if (occupationCount > 0)
             {
                 int occupationNumber = Random.Range(0, occupationCount);
+                int randomDirection = 0, initialNumber = occupationNumber;
+                while(luringMachine.occupyingDodos[occupationNumber] != null)
+                {
+                    if (randomDirection == 0)
+                        randomDirection = Random.Range(0, 1) * 2 - 1;
+                    occupationNumber += randomDirection;
+                    if (occupationNumber < 0)
+                        occupationNumber = occupationCount - 1;
+                    if (occupationNumber >= occupationCount)
+                        occupationNumber = 0;
+                    if (occupationNumber == initialNumber)
+                    {
+                        dodoManager.stateMachine.SetTrigger("delure");
+                        return;
+                    }
+                }
                 occupation = machineChild.GetChild(occupationNumber);
+                dodoManager.machineOccupationId = occupationNumber;
             }
 
         }
@@ -42,7 +59,12 @@ public class LuredBehaviour : StateMachineBehaviour
             if (occupationFinishTime == 0)
             {
                 dodoManager.transform.rotation = occupation.rotation;
-                luringMachine.StartInteraction(dodoManager);
+                bool ableToInteract = luringMachine.StartInteraction(dodoManager);
+                if (!ableToInteract)
+                {
+                    dodoManager.stateMachine.SetTrigger("delure");
+                    return;
+                }
                 occupationFinishTime = Time.time + luringMachine.occupationTime;
             } else if (Time.time > occupationFinishTime) {
                 if (luringMachine != null)

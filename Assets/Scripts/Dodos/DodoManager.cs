@@ -14,6 +14,7 @@ public class DodoManager : MonoBehaviour
     public List<LuringMachineAbstract> luringMachines { get; set; }
     [HideInInspector]
     public LuringMachineAbstract luringMachine;
+    public int machineOccupationId;
 
     [SerializeField]
     public float speed = 1;
@@ -35,6 +36,7 @@ public class DodoManager : MonoBehaviour
         hungerAnimationProgress = 0;
         stateMachine = GetComponent<Animator>();
         luringMachines = new List<LuringMachineAbstract>();
+        machineOccupationId = 0;
         rb = GetComponent<Rigidbody2D>();
         GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
         if (spaceStation == null)

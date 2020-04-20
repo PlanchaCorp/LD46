@@ -29,6 +29,7 @@ public class WanderingBehaviour : StateMachineBehaviour
 
         if (dodoManager.luringMachines.Count > 0)
         {
+            int i = 0;
             foreach(LuringMachineAbstract machine in dodoManager.luringMachines)
             {
                 if (machine.IsDodoLured(dodoManager))
@@ -37,6 +38,7 @@ public class WanderingBehaviour : StateMachineBehaviour
                     dodoManager.stateMachine.SetTrigger("lure");
                     return;
                 }
+                i++;
             }
         }
     }
