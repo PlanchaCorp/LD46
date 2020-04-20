@@ -10,6 +10,14 @@ public class Inventory : MonoBehaviour
     public GameObject[] slots;
     [SerializeField]
     public PlaceableElement[] placables;
+    [SerializeField]
+    public SpriteRenderer[] placeableIcons;
+    [SerializeField]
+    public Vector2[] placeableSizes;
+    [SerializeField]
+    public GameObject[] placeablePrefabs;
+    [SerializeField]
+    public float[] placeablePrices;
 
     private SpaceStationManager spaceStationManager;
 
@@ -36,12 +44,23 @@ public class Inventory : MonoBehaviour
         }
         spaceStationManager = spaceStation.GetComponent<SpaceStationManager>();
     }
+    public void OnSlotClick(int index) {
+        if (placeablePrices[index] < spaceStationManager.dodoniumAmount)
+        {
+            highlight.size = placeableSizes[index];
+            highlight.placableElement = placeablePrefabs[index];
+            highlight.placablePrice = placeablePrices[index];
+            highlight.transform.localScale = placeableSizes[index];
+            highlight.gameObject.SetActive(true);
+        }
+    }
     public void OnSlotClick(PlaceableElement placable) {
         if (placable.price < spaceStationManager.dodoniumAmount)
         {
             highlight.size = placable.size;
             highlight.placableElement = placable.element;
             highlight.placablePrice = placable.price;
+            highlight.transform.localScale = placable.size;
             highlight.gameObject.SetActive(true);
         } else {
             Debug.Log("You lack resources!");

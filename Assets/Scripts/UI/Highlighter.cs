@@ -40,6 +40,7 @@ public class Highlighter : MonoBehaviour
         uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = placableElement != null;
+        Debug.Log("Scale Size" + size);
         transform.localScale = size;
         obstructionObject = 0;
         collisions = new List<GameObject>();
@@ -59,10 +60,17 @@ public class Highlighter : MonoBehaviour
     {
         Vector3Int cell = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         Vector2 worldPos = floorTilemap.CellToWorld(cell);
-        if (size.x % 2 != 0)
-            worldPos.x += 0.5f;
-        if (size.y % 2 != 0)
-            worldPos.y += 0.5f;
+        if (size.x % 2 != 0) {
+            if (angle % 180 == 0)
+                worldPos.x += 0.5f;
+            else
+                worldPos.y += 0.5f;
+        } if (size.y % 2 != 0) {
+            if (angle % 180 == 0)
+                worldPos.y += 0.5f;
+            else
+                worldPos.x += 0.5f;
+        }
         transform.position = worldPos;
         if (placableElement != null)
         {
