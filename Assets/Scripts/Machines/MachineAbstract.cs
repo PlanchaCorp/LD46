@@ -7,7 +7,7 @@ public abstract class MachineAbstract : MonoBehaviour
     protected float resourceProductionFrequency = 0.5f;
     protected float resourceReceiveFrequency = 0.5f;
 
-    private SpaceStationManager spaceStationManager;
+    protected SpaceStationManager spaceStationManager;
 
     protected float oxygenPerMinuteGenerating = 0;
     protected float dodoniumPerMinuteGenerating = 0;
@@ -56,24 +56,22 @@ public abstract class MachineAbstract : MonoBehaviour
     public virtual void Produce()
     {
         if (productionAccumulatedTime >= resourceProductionFrequency && 
-                (!isReceivingOxygen || !isReceivingDodonium) &&
                 (oxygenPerMinuteGenerating > 0 || dodoniumPerMinuteGenerating > 0 || oxygenAccumulated > 0 || dodoniumAccumulated > 0))
         {
-            float unconsumedTime = productionAccumulatedTime % resourceProductionFrequency;
             if (spaceStationManager != null) 
             {
                 if (!isReceivingOxygen)
                 {
-                    oxygenAccumulated = 0;
                     spaceStationManager.BufferOxygen(oxygenPerMinuteGenerating * (productionAccumulatedTime / 60) + oxygenAccumulated);
+                    oxygenAccumulated = 0;
                 }
                 if (!isReceivingDodonium)
                 {
-                    dodoniumAccumulated = 0;
                     spaceStationManager.BufferDodonium(dodoniumPerMinuteGenerating * (productionAccumulatedTime / 60) + dodoniumAccumulated);
+                    dodoniumAccumulated = 0;
                 }
             }
-            productionAccumulatedTime = unconsumedTime;
+            productionAccumulatedTime %= resourceProductionFrequency;
         }
     }
     /// Requesting resources

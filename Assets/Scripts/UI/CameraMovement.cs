@@ -15,7 +15,9 @@ public class CameraMovement : MonoBehaviour
     public float MAX_ZOOM = 4;
     [SerializeField]
     public float MIN_ZOOM = 10;
-    CinemachineVirtualCamera virtualCamera;
+    private Camera camera;
+    private CinemachineVirtualCamera virtualCamera;
+    private Collider2D confiner;
 
     private float screenWidth;
     private float screenHeight;
@@ -23,7 +25,9 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camera = transform.parent.GetComponentInChildren<Camera>();
         virtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
+        confiner = transform.parent.GetComponentInChildren<CinemachineConfiner>().m_BoundingShape2D;
         screenWidth = Screen.width;
         screenHeight = Screen.height;
     }
@@ -69,6 +73,23 @@ public class CameraMovement : MonoBehaviour
             virtualCamera.m_Lens.OrthographicSize = Mathf.Min(virtualCamera.m_Lens.OrthographicSize + ZOOM_SPEED * Time.deltaTime, MIN_ZOOM);
         }
 
-        transform.Translate(new Vector2(xDirection * MOVE_SPEED * Time.deltaTime, yDirection * MOVE_SPEED * Time.deltaTime));
+        if (xDirection != 0 || yDirection != 0) 
+        {
+            transform.Translate(new Vector2(xDirection * MOVE_SPEED * Time.deltaTime, yDirection * MOVE_SPEED * Time.deltaTime));
+
+            float camHalfWidth = ((float) Screen.width / (float) Screen.height) * virtualCamera.m_Lens.OrthographicSize;
+            Vector2 minBoundary = new Vector2(confiner.bounds.min.x + camHalfWidth, confiner.bounds.min.y + virtualCamera.m_Lens.OrthographicSize);
+            Vector2 maxBoundary = new Vector2(confiner.bounds.max.x - camHalfWidth, confiner.bounds.max.y - virtualCamera.m_Lens.OrthographicSize);
+
+            if (transform.position.x < minBoundary.x)
+                transform.position = new Vector2(minBoundary.x, transform.position.y);
+            else if (transform.position.x > maxBoundary.x)
+                transform.position = new Vector2(maxBoundary.x, transform.position.y);
+            if (transform.position.y < minBoundary.y)
+                transform.position = new Vector2(transform.position.x, minBoundary.y);
+            else if (transform.position.y > maxBoundary.y)
+                transform.position = new Vector2(transform.position.x, maxBoundary.y);
+
+        }
     }
 }

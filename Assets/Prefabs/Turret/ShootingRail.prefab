@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3407278116724314865, guid: c2ba0e6ab6b6e5548b01de6f3eb7243b, type: 3}
   cannon: {fileID: 4599994890247347545}
+  speed: 20
   canFire: 1
 --- !u!50 &272648289367874968
 Rigidbody2D:

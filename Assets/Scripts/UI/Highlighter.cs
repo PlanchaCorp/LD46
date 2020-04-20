@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Higlighter : MonoBehaviour
+public class Highlighter : MonoBehaviour
 {
     public int obstructionObject;
 
@@ -54,6 +54,10 @@ public class Higlighter : MonoBehaviour
         {
             Instantiate(placableElement, worldPos, Quaternion.identity);
              gameObject.SetActive(false);
+        }
+        if (Input.GetMouseButton(1))
+        {
+            gameObject.SetActive(false);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)

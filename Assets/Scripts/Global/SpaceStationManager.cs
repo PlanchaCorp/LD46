@@ -42,6 +42,10 @@ public class SpaceStationManager : MonoBehaviour
         productionAccumulatedTime += Time.deltaTime;
     }
 
+    public void AddDodo(MachineAbstract birthPlace)
+    {
+        
+    }
     /// The station is receiving resources which will be waiting to be inserted into the station systems
     public void BufferOxygen(float oxygen)
     {

@@ -9,6 +9,8 @@ public class TurretBehaviour : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private Transform cannon;
+    [SerializeField]
+    private float speed = 10;
     private Camera mainCamera;
 
     private Rail rail;
@@ -37,9 +39,9 @@ public class TurretBehaviour : MonoBehaviour
         Debug.DrawLine(transform.position, mousePos, Color.blue);
         Vector3 delta = mousePos - transform.position;
 
-        Vector2 position2d = new Vector2(transform.position.x, transform.position.y);
-        float angleMin = Vector2.SignedAngle(position2d - getPrevious(), Vector2.right);
-        float angleMax = Vector2.SignedAngle(position2d - getNext(), Vector2.right);
+        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
+        float angleMin = Vector2.SignedAngle(position - getPrevious(), Vector2.right);
+        float angleMax = Vector2.SignedAngle(position - getNext(), Vector2.right);
         float willenAngle = Mathf.Atan2(delta.y, delta.x) * -Mathf.Rad2Deg;
 
         if (((willenAngle < angleMin - 90 && willenAngle > angleMin - 180) || (willenAngle > angleMax && willenAngle < angleMax + 90)))
@@ -54,12 +56,12 @@ public class TurretBehaviour : MonoBehaviour
         var newPos = Vector2.zero;
         if (Input.GetAxis("TurretMovement") > 0)
         {
-            newPos = Vector2.MoveTowards(transform.position, getPrevious(), 10 * Time.deltaTime);
+            newPos = Vector2.MoveTowards(transform.position, getPrevious(), Mathf.Min((transform.position - getPrevious()).magnitude, speed * Time.deltaTime));
             rb.MovePosition(newPos);
 
         } else if (Input.GetAxis("TurretMovement") < 0)
         {
-            newPos = Vector2.MoveTowards(transform.position, getNext(), 10 * Time.deltaTime);
+            newPos = Vector2.MoveTowards(transform.position, getNext(), Mathf.Min((transform.position - getNext()).magnitude, speed * Time.deltaTime));
             rb.MovePosition(newPos);
         }
     }
@@ -92,11 +94,11 @@ public class TurretBehaviour : MonoBehaviour
         previousPoint = (previousPoint == 0) ? rail.waypoints.Length - 1 : --previousPoint;
     }
 
-    private Vector2 getPrevious()
+    private Vector3 getPrevious()
     {
         return rail.waypoints[previousPoint].position;
     }
-    private Vector2 getNext()
+    private Vector3 getNext()
     {
         return rail.waypoints[nextPoint].position;
     }

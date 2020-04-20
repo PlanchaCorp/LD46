@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3269120027008188932
 Transform:
   m_ObjectHideFlags: 0
@@ -70,10 +70,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 917d905f8f44a6347bcd2293fb8dbfad, type: 3}
+  m_SortingLayerID: -817606657
+  m_SortingLayer: 1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 430670d3ff7b04944837f134f5b8647c, type: 3}
   m_Color: {r: 0.16428497, g: 0.7372549, b: 0.1490196, a: 0.5176471}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,8 +94,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -122,10 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a5e6fb40af91244a3e671dceb394c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlace: 0
+  obstructionObject: 0
   grid: {fileID: 0}
   floorTilemap: {fileID: 0}
   size: 0
+  placableElement: {fileID: 0}
 --- !u!50 &3269120027008188935
 Rigidbody2D:
   serializedVersion: 4
