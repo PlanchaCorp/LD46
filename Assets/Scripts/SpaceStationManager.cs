@@ -16,11 +16,12 @@ public class SpaceStationManager : MonoBehaviour
     [SerializeField]
     public float OXYGEN_PER_DODO_PER_MINUTE = 2.0f;
     [SerializeField]
-    public const float DODONIUM_INITIAL_AMOUNT = 15;
+    public float DODONIUM_INITIAL_AMOUNT = 15;
     [SerializeField]
     public GameObject dodoPrefab;
-
+    [HideInInspector]
     private List<MachineAbstract> machines;
+    public List<Recycler> recyclers;
     private UiDisplay uiDisplay;
 
 
@@ -38,6 +39,7 @@ public class SpaceStationManager : MonoBehaviour
         dodoniumAmount = DODONIUM_INITIAL_AMOUNT;
         uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         machines = new List<MachineAbstract>();
+        recyclers = new List<Recycler>();
         InvokeRepeating("Generate", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
         InvokeRepeating("ConsumeOxygen", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
     }
@@ -117,6 +119,8 @@ public class SpaceStationManager : MonoBehaviour
     public void RegisterMachine(MachineAbstract machine)
     {
         machines.Add(machine);
+        if (machine is Recycler)
+            recyclers.Add((Recycler)machine);
     }
     public void UnregisterMachine(MachineAbstract machine)
     {
