@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < slots.Length; i++) {
+        /*for (int i = 0; i < slots.Length; i++) {
             if (placables.Length > i) {
                 UnityEngine.UI.Image[] images = slots[i].GetComponentsInChildren<UnityEngine.UI.Image>();
                 foreach(UnityEngine.UI.Image img in images){
@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
                 }
                
             }
-        }
+        }*/
         GameObject spaceStation = GameObject.FindWithTag("SpaceStation");
         if (spaceStation == null)
         {

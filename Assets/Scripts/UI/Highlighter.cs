@@ -70,9 +70,12 @@ public class Highlighter : MonoBehaviour
             {
                 if (placablePrice <= spaceStationManager.dodoniumAmount)
                 {
-                    Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle + 90, Vector3.forward));
-                    if (!placableElement.CompareTag("Conveyer"))
+                    if (placableElement.CompareTag("Conveyer"))
+                        Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle + 90, Vector3.forward));
+                    else {
+                        Instantiate(placableElement, worldPos, Quaternion.AngleAxis(angle, Vector3.forward));
                         Invoke("Disable", 0.1f);
+                    }
                     spaceStationManager.dodoniumAmount -= placablePrice;
                 } else {
                     Debug.Log("You lack resources!");
