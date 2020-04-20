@@ -6,16 +6,16 @@ public class Refiner : MachineAbstract
 {
     public const float MAX_OXYGEN_STORAGE = 80;
     public const float RESOURCE_PRODUCTION_FREQUENCY = 10;
-    public const float OXYGEN_PRODUCTION_AMOUNT = 15;
+    public const float OXYGEN_PRODUCTION_AMOUNT = 1.5f;
 
     
     protected override void Start()
     {
         base.Start();
-        maxOxygenStorage = MAX_OXYGEN_STORAGE;
+        maxDodoniumStorage = MAX_OXYGEN_STORAGE;
         resourceProductionFrequency = RESOURCE_PRODUCTION_FREQUENCY;
-        oxygenPerMinuteGenerating = OXYGEN_PRODUCTION_AMOUNT;
-        oxygenAccumulated = 0;
+        dodoniumPerMinuteGenerating = OXYGEN_PRODUCTION_AMOUNT;
+        dodoniumAccumulated = 5;
     }
 
     protected override void OnMouseDown()

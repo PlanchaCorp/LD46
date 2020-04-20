@@ -7,6 +7,8 @@ public class DodoManager : MonoBehaviour
     public const float RELAX_TIME_MIN = 10; // Time before the dodo can relax itself after eating
     public const float RELAX_TIME_MAX = 40; // Time the dodo can go without going to the litter
     private const float HUNGER_INCREASE = 0.005f; // How many point hunger loses by second
+    public const float DODO_HUNGER = 60f;
+    public const float DODO_STARVE = 120f;
 
     public SpaceStationManager spaceStationManager { get; set; }
     public List<LuringMachineAbstract> luringMachines { get; set; }
@@ -26,9 +28,11 @@ public class DodoManager : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool canMove = true;
+    public int hungerAnimationProgress = 0;
 
     void Start()
     {
+        hungerAnimationProgress = 0;
         stateMachine = GetComponent<Animator>();
         luringMachines = new List<LuringMachineAbstract>();
         rb = GetComponent<Rigidbody2D>();
@@ -43,6 +47,16 @@ public class DodoManager : MonoBehaviour
 
     void Update() {
         hunger += HUNGER_INCREASE * Time.deltaTime;
+        if (hunger > DODO_STARVE) 
+        {
+            // TODO: Die, dodo, die
+        } else if (hunger > DODO_HUNGER + ((DODO_STARVE - DODO_HUNGER)/3) * 2 && hungerAnimationProgress < 2) {
+            Animate("StarveAnimation", AnimationPosition.TopLeft);
+            hungerAnimationProgress = 2;
+        } else if (hunger > DODO_HUNGER && hungerAnimationProgress < 1) {                
+            Animate("HungerAnimation", AnimationPosition.TopLeft);
+            hungerAnimationProgress = 1;
+        }
         if (mealTimeAgo < RELAX_TIME_MAX / 3)
             readyToEgg = Mathf.Max(readyToEgg + Time.deltaTime, 1);
         if (mealTimeAgo > 0)
@@ -52,13 +66,7 @@ public class DodoManager : MonoBehaviour
             {
                 mealTimeAgo = 0;
                 Debug.Log("Oh no! The dodo could not take it anymore!");
-                GameObject animation = Instantiate(Resources.Load<GameObject>("DisgraceAnimation"));
-                if (animation == null) {
-                    Debug.LogError("Could not find DisgraceAnimation prefab in Resources folder!");
-                } else {
-                    animation.transform.parent = transform;
-                    animation.transform.position = transform.position + new Vector3(0.4f, 0.6f, 0);
-                }
+                Animate("DisgraceAnimation", AnimationPosition.TopRight);
             }
         }
     }
@@ -92,6 +100,19 @@ public class DodoManager : MonoBehaviour
         }
         if(collision.CompareTag("Conveyer")) {
             stateMachine.SetBool("Conveyed",false);
+        }
+    }
+
+    public enum AnimationPosition { TopRight, TopLeft }
+    public void Animate(string animationName, AnimationPosition positionName)
+    {
+        Vector3 position = (positionName == AnimationPosition.TopRight) ? new Vector3(0.4f, 0.6f, 0) : new Vector3(-0.4f, 0.6f, 0);
+        GameObject animation = Instantiate(Resources.Load<GameObject>(animationName));
+        if (animation == null) {
+            Debug.LogError("Could not find " + animationName + " prefab in Resources folder!");
+        } else {
+            animation.transform.parent = transform;
+            animation.transform.position = transform.position + position;
         }
     }
 }

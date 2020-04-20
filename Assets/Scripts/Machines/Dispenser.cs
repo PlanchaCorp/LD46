@@ -5,7 +5,6 @@ using UnityEngine;
 public class Dispenser : LuringMachineAbstract
 {
     public const float EAT_TIME = 5.0f;
-    public const float DODO_HUNGER = 60f;
     public const float MAX_DODONIUM_STORAGE = 5;
     public const int FOOD_STORAGE = 3;
     public const float RESOURCE_RECEIVE_FREQUENCY = 2;
@@ -24,7 +23,7 @@ public class Dispenser : LuringMachineAbstract
 
     public override bool IsDodoLured(DodoManager dodo)
     {
-        return dodo.hunger > DODO_HUNGER;
+        return dodo.hunger > DodoManager.DODO_HUNGER;
     }
 
     protected override void OnMouseDown()
@@ -49,16 +48,11 @@ public class Dispenser : LuringMachineAbstract
     public override void FinishInteraction(DodoManager dodo) 
     {
         dodo.hunger = 0;
+        dodo.hungerAnimationProgress = 0;
         dodo.mealTimeAgo += 0.01f;
         foodServed--;
 
-        GameObject animation = Instantiate(Resources.Load<GameObject>("FedAnimation"));
-        if (animation == null) {
-            Debug.LogError("Could not find FedAnimation prefab in Resources folder!");
-        } else {
-            animation.transform.parent = transform;
-            animation.transform.position = dodo.transform.position + new Vector3(0.4f, 0.6f, 0);
-        }
+        dodo.Animate("FedAnimation", DodoManager.AnimationPosition.TopRight);
 
         base.FinishInteraction(dodo);
     }

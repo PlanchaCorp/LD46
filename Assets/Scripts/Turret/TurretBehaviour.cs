@@ -11,6 +11,8 @@ public class TurretBehaviour : MonoBehaviour
     private Transform cannon;
     [SerializeField]
     private float speed = 10;
+    [SerializeField]
+    private float shootingSpeed = 8;
     private Camera mainCamera;
 
     private Rail rail;
@@ -19,10 +21,12 @@ public class TurretBehaviour : MonoBehaviour
     // Start is called before the first frame update
     private int nextPoint;
     private int previousPoint;
+    private float nextShootingTime;
 
     private Rigidbody2D rb;
     void Start()
     {
+        nextShootingTime = 0;
         uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         rb = GetComponent<Rigidbody2D>();
         rail = GetComponentInParent<Rail>();
@@ -49,7 +53,7 @@ public class TurretBehaviour : MonoBehaviour
         else if (((willenAngle < angleMin && willenAngle > angleMin - 90) || (willenAngle > angleMax + 90 && willenAngle < angleMax + 180)))
             willenAngle = angleMin;
         transform.rotation = Quaternion.AngleAxis(-willenAngle - 90, Vector3.forward);
-        if (Input.GetMouseButtonDown(0) && uiDisplay.TurretCanShoot())
+        if (Input.GetMouseButton(0) && uiDisplay.TurretCanShoot() && Time.time > nextShootingTime)
         {
             Fire();
         }
@@ -68,6 +72,7 @@ public class TurretBehaviour : MonoBehaviour
 
     private void Fire()
     {
+        nextShootingTime = Time.time + 1 / shootingSpeed;
         Instantiate(bullet, cannon.position, cannon.rotation);
     }
 
