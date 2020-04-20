@@ -56,6 +56,7 @@ public class Litter : LuringMachineAbstract
             dodoniumAccumulated = maxDodoniumStorage;
         }
 
+        dodo.Animate("RelaxAnimation", DodoManager.AnimationPosition.TopRight);
         GameObject animation = Instantiate(Resources.Load<GameObject>("RelaxAnimation"));
         if (animation == null) {
             Debug.LogError("Could not find RelaxAnimation prefab in Resources folder!");

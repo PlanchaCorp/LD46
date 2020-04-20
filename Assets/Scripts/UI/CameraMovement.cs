@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
     public float MAX_ZOOM = 4;
     [SerializeField]
     public float MIN_ZOOM = 10;
-    private Camera camera;
+    private Camera cameraComponent;
     private CinemachineVirtualCamera virtualCamera;
     private Collider2D confiner;
 
@@ -25,7 +25,7 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = transform.parent.GetComponentInChildren<Camera>();
+        cameraComponent = transform.parent.GetComponentInChildren<Camera>();
         virtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
         confiner = transform.parent.GetComponentInChildren<CinemachineConfiner>().m_BoundingShape2D;
         screenWidth = Screen.width;

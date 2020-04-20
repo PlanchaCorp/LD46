@@ -14,13 +14,14 @@ public class SpaceStationManager : MonoBehaviour
     [SerializeField]
     public float OXYGEN_MAX_AMOUNT = 300;
     [SerializeField]
+    public float OXYGEN_PER_DODO_PER_MINUTE = 2.0f;
+    [SerializeField]
     public const float DODONIUM_INITIAL_AMOUNT = 15;
     [SerializeField]
     public GameObject dodoPrefab;
 
     private List<MachineAbstract> machines;
-
-    private float productionAccumulatedTime;
+    private UiDisplay uiDisplay;
 
 
     public int dodoAmount { get; set; }
@@ -35,19 +36,21 @@ public class SpaceStationManager : MonoBehaviour
         dodoAmount = 1;
         oxygenAmount = OXYGEN_INITIAL_AMOUNT;
         dodoniumAmount = DODONIUM_INITIAL_AMOUNT;
+        uiDisplay = GameObject.FindGameObjectWithTag("MainUI").GetComponent<UiDisplay>();
         machines = new List<MachineAbstract>();
         InvokeRepeating("Generate", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
+        InvokeRepeating("ConsumeOxygen", RESOURCE_GENERATION_FREQUENCY, RESOURCE_GENERATION_FREQUENCY);
     }
 
     void Update()
     {
-        productionAccumulatedTime += Time.deltaTime;
     }
 
     public void AddDodo(MachineAbstract birthPlace)
     {
         dodoAmount++;
-        Instantiate(dodoPrefab, birthPlace.transform);
+        GameObject newDodo = Instantiate(dodoPrefab);
+        newDodo.transform.position = birthPlace.transform.position;
     }
     /// The station is receiving resources which will be waiting to be inserted into the station systems
     public void BufferOxygen(float oxygen)
@@ -85,15 +88,29 @@ public class SpaceStationManager : MonoBehaviour
     /// Generating resources
     private void Generate()
     {
-        if (productionAccumulatedTime >= RESOURCE_GENERATION_FREQUENCY && (bufferedOxygen > 0 || bufferedDodonium > 0))
+        if (bufferedOxygen > 0 || bufferedDodonium > 0)
         {
-            productionAccumulatedTime = productionAccumulatedTime % RESOURCE_GENERATION_FREQUENCY;
             oxygenAmount += bufferedOxygen;
             dodoniumAmount += bufferedDodonium;
+            uiDisplay.AnimateAmounts(bufferedDodonium, bufferedOxygen);
             bufferedOxygen = 0;
             bufferedDodonium = 0;
+            uiDisplay.UpdateAmounts(dodoniumAmount, oxygenAmount / OXYGEN_MAX_AMOUNT);
             Debug.Log("Your station now has " + oxygenAmount + "L of oxygen and " + dodoniumAmount + "kg of dodonium.");
         }
+    }
+
+    private void ConsumeOxygen()
+    {
+        oxygenAmount -= Mathf.Max(dodoAmount * OXYGEN_PER_DODO_PER_MINUTE * (RESOURCE_GENERATION_FREQUENCY / 60), 0);
+        if (oxygenAmount == 0)
+        {
+            Debug.Log("The dodos are now extinct.");
+            // TODO: GameOver after dodo death animation
+        } else if (oxygenAmount < OXYGEN_PER_DODO_PER_MINUTE * dodoAmount * 5) {
+            Debug.Log("The dodos are struggling to breathe...");
+        }
+        uiDisplay.UpdateAmounts(dodoniumAmount, oxygenAmount / OXYGEN_MAX_AMOUNT);
     }
 
     /// Register and unregister machines from space station
