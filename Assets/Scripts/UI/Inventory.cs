@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
     public Highlighter highlight;
     [SerializeField]
-    public Image[] slots;
+    public GameObject[] slots;
     [SerializeField]
     public PlaceableElement[] placables;
 
@@ -16,9 +15,15 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++) {
             if (placables.Length > i) {
-                slots[i].sprite = placables[i].icon;
-                float currentSize = slots[i].rectTransform.sizeDelta.x;
-                slots[i].rectTransform.sizeDelta = new Vector2(currentSize * 3 / 5, currentSize * 3 / 5);
+                UnityEngine.UI.Image[] images = slots[i].GetComponentsInChildren<UnityEngine.UI.Image>();
+                foreach(UnityEngine.UI.Image img in images){
+                    if(img.name == "SlotItem"){
+                        img.sprite = placables[i].icon;
+                        float currentSize = img.rectTransform.sizeDelta.x;
+                        img.rectTransform.sizeDelta = new Vector2(currentSize * 3 / 5, currentSize * 3 / 5);
+                    }
+                }
+               
             }
         }
     }
@@ -26,5 +31,13 @@ public class Inventory : MonoBehaviour
         highlight.size = placable.size;
         highlight.placableElement = placable.element;
         highlight.gameObject.SetActive(true);
+    }
+    void Update(){
+        for(int i =1;i<=placables.Length; i++){
+            if(Input.GetButtonDown("Hotkey"+ i )){
+                Debug.Log("button pressed" + i);
+                slots[i-1].GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
+            }
+        }
     }
 }
