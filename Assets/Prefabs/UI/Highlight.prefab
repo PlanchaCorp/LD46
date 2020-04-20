@@ -125,7 +125,7 @@ MonoBehaviour:
   obstructionObject: 0
   grid: {fileID: 0}
   floorTilemap: {fileID: 0}
-  size: 0
+  size: 2
   placableElement: {fileID: 0}
 --- !u!50 &3269120027008188935
 Rigidbody2D:

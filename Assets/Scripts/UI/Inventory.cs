@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    Highlighter highlight;
+    public Highlighter highlight;
     [SerializeField]
     public Image[] slots;
     [SerializeField]

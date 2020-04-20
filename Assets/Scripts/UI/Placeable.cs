@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlaceableElement : ScriptableObject
 {
     public Sprite icon;
-    public int size;
+    public Vector2 size;
 
     public GameObject element;
 }

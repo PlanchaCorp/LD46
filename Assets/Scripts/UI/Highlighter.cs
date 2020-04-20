@@ -11,49 +11,46 @@ public class Highlighter : MonoBehaviour
     [SerializeField]
     Tilemap floorTilemap;
 
-    [Range(1, 3)]
-    public int size;
+    public Vector2 size;
 
     public GameObject placableElement;
+    private UiDisplay uiDisplay;
 
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        transform.localScale = new Vector2(size, size);
-        obstructionObject = 0;
     }
 
     void OnEnable()
     {
-        transform.localScale = new Vector2(size, size);
+        uiDisplay = GetComponentInParent<UiDisplay>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        transform.localScale = size;
         obstructionObject = 0;
         GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = false;
+        uiDisplay.UpdateCursor();
     }
     void OnDisable(){
         placableElement = null;
         GameObject.Find("Turret").GetComponent<TurretBehaviour>().canFire = true;
+        uiDisplay.UpdateCursor();
     }
 
 
     void LateUpdate()
     {
         Vector3Int cell = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Vector2 worldPos;
-        if (size % 2 != 0)
-        {
-            worldPos = floorTilemap.GetCellCenterWorld(cell);
-        }
-        else
-        {
-            worldPos = floorTilemap.CellToWorld(cell);
-        }
+        Vector2 worldPos = floorTilemap.CellToWorld(cell);
+        if (size.x % 2 != 0)
+            worldPos.x += 0.5f;
+        if (size.y % 2 != 0)
+            worldPos.y += 0.5f;
         transform.position = worldPos;
         if (Input.GetMouseButtonDown(0) && obstructionObject == 0)
         {
             Instantiate(placableElement, worldPos, Quaternion.identity);
-             gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         if (Input.GetMouseButton(1))
         {
@@ -62,7 +59,6 @@ public class Highlighter : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("enter");
         if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
         {
             obstructionObject++;
@@ -72,7 +68,6 @@ public class Highlighter : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("exit");
         if (collision.CompareTag("Wall") || collision.CompareTag("Machine") || collision.CompareTag("Dodo"))
         {
             obstructionObject--;
