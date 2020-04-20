@@ -16,7 +16,7 @@ public class Incubator : LuringMachineAbstract
 
     public override bool IsDodoLured(DodoManager dodo)
     {
-        return dodo.readyToEgg >= 1 && base.IsDodoLured(dodo);
+        return dodo.readyToEgg >= 60.0f && base.IsDodoLured(dodo);
     }
 
     protected override void OnMouseDown()

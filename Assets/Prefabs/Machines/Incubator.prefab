@@ -212,7 +212,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc1f45564fa11fe298029a1e3a54b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupationPlaces: []
+  occupationPlaces:
+  - {fileID: 5906866267954382693}
+  - {fileID: 5906866269151479353}
+  - {fileID: 5906866267731442224}
+  - {fileID: 5906866268230902332}
   occupyingDodos: []
   occupationTime: 0
 --- !u!1 &5906866268635558214
