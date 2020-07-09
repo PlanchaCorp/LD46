@@ -6,6 +6,6 @@ before_install:
 
 script:
 - docker run -v "$(pwd):/root/project" gableroux/unity3d:2019.4.2f1-webgl "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' /opt/Unity/Editor/Unity -projectPath /root/project -logFile /root/project/build.log -quit -batchmode -executeMethod WebGLBuilder.build"
-- cat /root/project/build.log
+- cat build.log
 - ls
 
