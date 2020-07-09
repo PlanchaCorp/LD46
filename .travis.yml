@@ -5,7 +5,7 @@ before_install:
 - docker pull gableroux/unity3d:2019.4.2f1-webgl
 
 script:
-- travis_wait 30 docker run -v "$(pwd):/root/project" gableroux/unity3d:2019.4.2f1-webgl xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' /opt/Unity/Editor/Unity -quit -batchmode -logFile /root/project/build.log -projectPath /root/project -executeMethod WebGLBuilder.build
+- travis_wait 50 docker run -v "$(pwd):/root/project" gableroux/unity3d:2019.4.2f1-webgl xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' /opt/Unity/Editor/Unity -quit -batchmode -logFile /root/project/build.log -projectPath /root/project -executeMethod WebGLBuilder.build
 - cat build.log
 - ls
 
