@@ -5,7 +5,7 @@ before_install:
 - docker pull gableroux/unity3d:2019.4.2f1-webgl
 
 script:
-- ./travis-build.sh
+- chmod +x travis-build.sh && ./travis-build.sh
 - cat build.log
 - ls
 
