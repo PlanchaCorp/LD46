@@ -1,0 +1,10 @@
+services:
+- docker
+
+before_install:
+- docker pull gableroux/unity3d:2019.4.2f1-webgl
+
+script:
+- /opt/Unity/Editor/Unity -quit -batchmode -executeMethod WebGLBuilder.build
+- ls
+
