@@ -5,6 +5,7 @@ env:
 services:
 - docker
 before_install:
+- openssl aes-256-cbc -K $encrypted_eb0343c8a585_key -iv $encrypted_eb0343c8a585_iv -in Unity_v2019.x.ulf.enc -out /Unity_v2019.x.ulf -d
 - openssl aes-256-cbc -K $encrypted_82766e747237_key -iv $encrypted_82766e747237_iv
   -in ./unity3d.alf -out ./Unity_v2019.x.ulf -d
 - export UNITY_LICENSE_CONTENT=`cat Unity_v2019.x.ulf`
